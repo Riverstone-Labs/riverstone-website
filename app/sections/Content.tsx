@@ -3,7 +3,7 @@
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Lock } from "lucide-react";
 import Image from "next/image";
 
 const articles = [
@@ -62,13 +62,14 @@ export function Content() {
               Latest Insights
             </h2>
           </div>
-          <a 
-            href="#"
-            className="inline-flex items-center gap-2 text-[#00d4ff] font-medium mt-4 md:mt-0 group"
+          <button
+            className="inline-flex items-center gap-2 text-[#71717a] font-medium mt-4 md:mt-0 cursor-not-allowed"
+            disabled
+            aria-label="Blog archive coming soon"
           >
-            <span>View all articles</span>
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
+            <Lock className="w-4 h-4" />
+            <span>Coming Soon</span>
+          </button>
         </ScrollReveal>
 
         {/* Articles Grid */}
@@ -113,11 +114,11 @@ export function Content() {
                     {article.excerpt}
                   </p>
 
-                  {/* Read more */}
+                  {/* Coming Soon */}
                   <div className="mt-4 pt-4 border-t border-white/5">
-                    <span className="inline-flex items-center gap-2 text-sm text-[#00d4ff] font-medium">
-                      Read more
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <span className="inline-flex items-center gap-2 text-sm text-[#71717a] font-medium">
+                      <Lock className="w-4 h-4" />
+                      Coming Soon
                     </span>
                   </div>
                 </CardContent>
@@ -143,13 +144,14 @@ export function Content() {
                   Deep dives into AI architecture, implementation patterns, and lessons learned from production systems.
                 </p>
               </div>
-              <a 
-                href="#"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-medium transition-colors duration-300 shrink-0"
+              <button
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600/50 text-white/50 font-medium cursor-not-allowed shrink-0"
+                disabled
+                aria-label="YouTube channel coming soon"
               >
-                Subscribe
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                <Lock className="w-4 h-4" />
+                Coming Soon
+              </button>
             </div>
           </div>
         </ScrollReveal>

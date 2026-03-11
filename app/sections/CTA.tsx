@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScrollReveal } from "../components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Send, Users, Sparkles } from "lucide-react";
+import { CheckCircle, Send, Users, Sparkles, AlertCircle } from "lucide-react";
 
 // Input sanitization helper
 const sanitizeInput = (value: string): string => {
@@ -28,11 +28,24 @@ export function CTA() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
+  const [csrfToken, setCsrfToken] = useState("");
   
   // Newsletter form state
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
   const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+
+  // Fetch CSRF token on mount
+  useEffect(() => {
+    fetch('/api/contact')
+      .then(res => res.json())
+      .then(data => {
+        if (data.csrfToken) {
+          setCsrfToken(data.csrfToken);
+        }
+      })
+      .catch(err => console.error('Failed to fetch CSRF token:', err));
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,11 +72,43 @@ export function CTA() {
     
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+          website: formData.website,
+          csrfToken: csrfToken,
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+        // Fetch new CSRF token for next submission
+        fetch('/api/contact')
+          .then(res => res.json())
+          .then(data => {
+            if (data.csrfToken) {
+              setCsrfToken(data.csrfToken);
+            }
+          });
+      } else {
+        setFormError(data.error || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setFormError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -85,7 +130,7 @@ export function CTA() {
     
     setNewsletterSubmitting(true);
     
-    // Simulate subscription
+    // Simulate subscription (implement real newsletter API later)
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     setNewsletterSubmitting(false);
@@ -147,8 +192,9 @@ export function CTA() {
                     </div>
                     
                     {formError && (
-                      <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                        {formError}
+                      <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-2">
+                        <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                        <span>{formError}</span>
                       </div>
                     )}
                     

@@ -1,14 +1,15 @@
 "use client";
 
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
-import { 
-  Map, 
-  MessageSquare, 
-  Database, 
-  Bot, 
-  Server, 
+import {
+  Map,
+  MessageSquare,
+  Database,
+  Bot,
+  Server,
   GraduationCap,
-  ArrowRight 
+  ArrowRight,
+  Clock
 } from "lucide-react";
 import Image from "next/image";
 
@@ -107,14 +108,15 @@ export function Services() {
                       {service.description}
                     </p>
 
-                    {/* Link */}
-                    <a 
-                      href={service.link}
-                      className="inline-flex items-center gap-2 text-sm text-[#00d4ff] font-medium group/link"
+                    {/* Coming Soon Button */}
+                    <button
+                      className="inline-flex items-center gap-2 text-sm text-[#71717a] font-medium cursor-not-allowed"
+                      disabled
+                      aria-label="Service details coming soon"
                     >
-                      <span>Learn more</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-                    </a>
+                      <Clock className="w-4 h-4" />
+                      <span>Coming Soon</span>
+                    </button>
                   </div>
                 </div>
               </div>
