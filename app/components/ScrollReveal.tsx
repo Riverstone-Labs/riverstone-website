@@ -23,6 +23,20 @@ export function ScrollReveal({
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-100px" });
   const controls = useAnimation();
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   const getInitialPosition = () => {
     switch (direction) {
@@ -44,6 +58,11 @@ export function ScrollReveal({
       controls.start("visible");
     }
   }, [isInView, controls]);
+
+  // Skip animation if reduced motion is preferred
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   const variants: Variants = {
     hidden: getInitialPosition(),
@@ -87,6 +106,24 @@ export function StaggerContainer({
 }: StaggerContainerProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-100px" });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  // Skip animation if reduced motion is preferred
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
@@ -115,6 +152,25 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
 }) {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  // Skip animation if reduced motion is preferred
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       variants={{
