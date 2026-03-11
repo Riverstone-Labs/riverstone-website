@@ -37,7 +37,7 @@ test.describe('Homepage', () => {
     await expect(page.getByText('Results That Speak')).toBeVisible();
     
     // About section
-    await expect(page.getByText('Meet Warwick')).toBeVisible();
+    await expect(page.getByText('About Riverstone Labs')).toBeVisible();
     
     // Content section
     await expect(page.getByText('Latest Insights')).toBeVisible();

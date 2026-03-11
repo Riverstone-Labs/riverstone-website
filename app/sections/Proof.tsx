@@ -26,7 +26,7 @@ const caseStudies = [
 
 const testimonials = [
   {
-    quote: "Warwick and his team did not just build us an AI system—they built our AI capability. Six months later, our team is shipping features independently.",
+    quote: "Riverstone Labs did not just build us an AI system—they built our AI capability. Six months later, our team is shipping features independently.",
     author: "Sarah Chen",
     role: "CTO",
     company: "TechScale Inc.",

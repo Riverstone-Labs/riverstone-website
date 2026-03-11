@@ -85,7 +85,7 @@ public/               # Static assets
 3. **Approach**: Process timeline with phases
 4. **Services**: 6 service cards in grid
 5. **Proof**: Case studies and testimonial carousel
-6. **About**: Warwick's bio and credentials
+6. **About**: Company capabilities and approach
 7. **Content**: Blog preview cards
 8. **CTA**: Contact form and newsletter
 9. **Footer**: Links and social icons
