@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
 
 // Rate limiting store (in production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT_MAX = 3; // Max submissions per hour
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+
+// Zod schema for input validation
+const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name must be less than 100 characters').trim(),
+  email: z.string().email('Please enter a valid email address').max(255, 'Email must be less than 255 characters').trim(),
+  company: z.string().max(100, 'Company must be less than 100 characters').trim().optional(),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(5000, 'Message must be less than 5000 characters').trim(),
+  website: z.string().max(0).optional(), // Honeypot field - should be empty
+  csrfToken: z.string(),
+});
 
 // Generate CSRF token
 function generateCSRFToken(): string {
@@ -82,7 +93,18 @@ export async function POST(request: NextRequest) {
     
     // Parse body
     const body = await request.json();
-    const { name, email, company, message, website, csrfToken } = body;
+    
+    // Validate with Zod schema
+    const validationResult = contactSchema.safeParse(body);
+    if (!validationResult.success) {
+      const errors = validationResult.error.issues.map(e => e.message).join(', ');
+      return NextResponse.json(
+        { success: false, error: errors },
+        { status: 400 }
+      );
+    }
+    
+    const { name, email, company, message, website, csrfToken } = validationResult.data;
     
     // Honeypot check
     if (website) {
@@ -105,29 +127,16 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Validate required fields
-    if (!name?.trim() || !email?.trim() || !message?.trim()) {
-      return NextResponse.json(
-        { success: false, error: 'Please fill in all required fields.' },
-        { status: 400 }
-      );
-    }
+    // Sanitize email headers - strip \r\n to prevent header injection
+    const sanitizedName = name.replace(/[\r\n<>]/g, '');
+    const sanitizedEmail = email.replace(/[\r\n<>]/g, '');
     
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { success: false, error: 'Please enter a valid email address.' },
-        { status: 400 }
-      );
-    }
-    
-    // Sanitize inputs
+    // Sanitize other inputs
     const sanitizedData = {
-      name: name.trim().replace(/[<>]/g, '').slice(0, 100),
-      email: email.trim().replace(/[<>]/g, '').slice(0, 100),
-      company: (company || '').trim().replace(/[<>]/g, '').slice(0, 100),
-      message: message.trim().replace(/[<>]/g, '').slice(0, 1000),
+      name: sanitizedName,
+      email: sanitizedEmail,
+      company: (company || '').replace(/[\r\n<>]/g, ''),
+      message: message.replace(/[<>]/g, ''),
       ip: clientIP,
       timestamp: new Date().toISOString()
     };
