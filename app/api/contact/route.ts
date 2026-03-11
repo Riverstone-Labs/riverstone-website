@@ -12,7 +12,7 @@ const contactSchema = z.object({
   email: z.string().email('Please enter a valid email address').max(255, 'Email must be less than 255 characters').trim(),
   company: z.string().max(100, 'Company must be less than 100 characters').trim().optional(),
   message: z.string().min(10, 'Message must be at least 10 characters').max(5000, 'Message must be less than 5000 characters').trim(),
-  website: z.string().max(0).optional(), // Honeypot field - should be empty
+  website: z.string().optional(), // Honeypot field - should be empty
   csrfToken: z.string(),
 });
 

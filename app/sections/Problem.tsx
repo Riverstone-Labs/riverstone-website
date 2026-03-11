@@ -1,100 +1,79 @@
 "use client";
 
-import {
-  ScrollReveal,
-  StaggerContainer,
-  StaggerItem,
-} from "../components/ScrollReveal";
-import { Target, AlertTriangle, Users } from "lucide-react";
+import { ScrollReveal } from "../components/ScrollReveal";
+import { X, Check } from "lucide-react";
 
-const problems = [
-  {
-    icon: Target,
-    title: "The Strategy Gap",
-    description:
-      "AI without business alignment. Projects that solve technical problems instead of business problems, leading to expensive solutions nobody asked for.",
-    stat: "67%",
-    statLabel: "of AI projects fail to align with business goals",
-  },
-  {
-    icon: AlertTriangle,
-    title: "The Implementation Trap",
-    description:
-      "POCs that never scale. Impressive demos that crumble under real-world load, data drift, and operational complexity.",
-    stat: "87%",
-    statLabel: "of ML models never reach production",
-  },
-  {
-    icon: Users,
-    title: "The Dependency Problem",
-    description:
-      "Consultants who never leave. External teams that build black-box systems, leaving you dependent on their continued involvement.",
-    stat: "$500K",
-    statLabel: "average annual vendor lock-in cost",
-  },
+const problemPoints = [
+  "Pilots that never scale",
+  "Vendors who disappear after implementation",
+  "Teams left without the skills to maintain systems",
+  "No measurable business impact",
+];
+
+const solutionPoints = [
+  "Selective engagement (we say no more than yes)",
+  "Embedded practitioners, not remote consultants",
+  "Knowledge transfer as core deliverable",
+  "Measurable outcomes, not vanity metrics",
 ];
 
 export function Problem() {
   return (
-    <section id="problem" className="py-24 bg-[#0a0a0f]">
+    <section id="problem" className="py-24 bg-[#1a1a1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <ScrollReveal className="text-center mb-16">
-          <span className="text-[#00d4ff] text-sm font-medium tracking-wider uppercase mb-4 block">
-            The Challenge
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-            Why Most AI Projects Fail
-          </h2>
-          <p className="text-lg text-[#a1a1aa] max-w-2xl mx-auto">
-            After working with dozens of enterprises, we have seen the same
-            patterns repeat. Here is why AI initiatives struggle—and how we fix
-            them.
-          </p>
-        </ScrollReveal>
-
-        {/* Problem Cards */}
-        <StaggerContainer
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          staggerDelay={0.15}
-        >
-          {problems.map((problem, index) => (
-            <StaggerItem key={index}>
-              <div className="group relative h-full">
-                {/* Card with gradient border on hover */}
-                <div className="relative h-full bg-[#12121a] rounded-2xl p-8 border border-white/5 transition-all duration-300 hover:border-[#00d4ff]/30 hover:bg-[#1a1a24]">
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00d4ff]/5 to-[#f59e0b]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  <div className="relative z-10">
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-xl bg-[#1a1a24] border border-white/10 flex items-center justify-center mb-6 group-hover:border-[#00d4ff]/30 transition-colors duration-300">
-                      <problem.icon className="w-7 h-7 text-[#00d4ff]" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* The Problem */}
+          <ScrollReveal>
+            <div className="h-full">
+              <span className="text-[#6b6b6b] text-sm font-medium tracking-wider uppercase mb-4 block">
+                The Problem
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#f5f5f0] mb-6 leading-tight">
+                Most AI projects fail before they start
+              </h2>
+              <p className="text-lg text-[#a0a0a0] leading-relaxed mb-8">
+                The industry is obsessed with &quot;pilot projects&quot; — small experiments that prove nothing, change nothing, and waste six months. By the time the pilot ends, the team has moved on, the budget is gone, and you&apos;re back where you started.
+              </p>
+              
+              <ul className="space-y-4">
+                {problemPoints.map((point, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <X className="w-3 h-3 text-red-400" />
                     </div>
+                    <span className="text-[#a0a0a0]">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ScrollReveal>
 
-                    {/* Content */}
-                    <h3 className="text-xl font-bold text-white mb-3">
-                      {problem.title}
-                    </h3>
-                    <p className="text-[#a1a1aa] leading-relaxed mb-6">
-                      {problem.description}
-                    </p>
-
-                    {/* Stat */}
-                    <div className="pt-6 border-t border-white/5">
-                      <div className="text-3xl font-bold gradient-text mb-1">
-                        {problem.stat}
-                      </div>
-                      <div className="text-sm text-[#71717a]">
-                        {problem.statLabel}
-                      </div>
+          {/* Our Solution */}
+          <ScrollReveal delay={0.2}>
+            <div className="h-full bg-[#242424] rounded-lg p-8 border border-[#333333]">
+              <span className="text-[#6b9b7a] text-sm font-medium tracking-wider uppercase mb-4 block">
+                Our Solution
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#f5f5f0] mb-6 leading-tight">
+                We embed for lasting change
+              </h2>
+              <p className="text-lg text-[#a0a0a0] leading-relaxed mb-8">
+                We work alongside your team, build systems that integrate with your operations, and transfer the knowledge so you own the capability. When we leave, you keep the value.
+              </p>
+              
+              <ul className="space-y-4">
+                {solutionPoints.map((point, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#4a7c59]/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-[#6b9b7a]" />
                     </div>
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+                    <span className="text-[#f5f5f0]">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useAnimation, Variants } from "framer-motion";
+import { useRef, useSyncExternalStore } from "react";
+import { motion, useInView, Variants } from "framer-motion";
+
+// Hook to detect reduced motion preference
+function usePrefersReducedMotion(): boolean {
+  return useSyncExternalStore(
+    (callback) => {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mediaQuery.addEventListener("change", callback);
+      return () => mediaQuery.removeEventListener("change", callback);
+    },
+    () => {
+      if (typeof window === "undefined") return false;
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    },
+    () => false
+  );
+}
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -22,21 +38,7 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-100px" });
-  const controls = useAnimation();
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    // Check for reduced motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const getInitialPosition = () => {
     switch (direction) {
@@ -52,12 +54,6 @@ export function ScrollReveal({
         return { y: 40, opacity: 0 };
     }
   };
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
 
   // Skip animation if reduced motion is preferred
   if (prefersReducedMotion) {
@@ -82,7 +78,7 @@ export function ScrollReveal({
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={controls}
+      animate={isInView ? "visible" : "hidden"}
       variants={variants}
       className={className}
     >
@@ -106,19 +102,7 @@ export function StaggerContainer({
 }: StaggerContainerProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: "-100px" });
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Skip animation if reduced motion is preferred
   if (prefersReducedMotion) {
@@ -152,19 +136,7 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
 }) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Skip animation if reduced motion is preferred
   if (prefersReducedMotion) {

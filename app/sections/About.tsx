@@ -1,177 +1,70 @@
 "use client";
 
 import { ScrollReveal } from "../components/ScrollReveal";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Users, Rocket, Shield } from "lucide-react";
-import Image from "next/image";
+import { CheckCircle } from "lucide-react";
 
-const capabilities = [
-  "AI agent design and implementation",
-  "Large language model integration and optimisation",
-  "Intelligent workflow automation",
-  "AI evaluation and safety frameworks",
-  "Custom AI tooling and infrastructure",
-];
-
-const values = [
-  {
-    icon: Rocket,
-    title: "Production-First",
-    description:
-      "We build systems designed for real-world operation from day one.",
-  },
-  {
-    icon: Users,
-    title: "Knowledge Transfer",
-    description:
-      "Your team owns the solution. We ensure they can maintain and evolve it independently.",
-  },
-  {
-    icon: Shield,
-    title: "Business Value",
-    description: "Technology serves business goals—not the other way around.",
-  },
+const credentials = [
+  "Former CTO/VP Engineering at technology companies",
+  "Built and scaled engineering teams to 50+",
+  "Implemented AI systems across professional services, logistics, and SaaS",
 ];
 
 export function About() {
   return (
-    <section id="about" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/about-collaboration.webp"
-          alt="Abstract human-AI collaboration visualization"
-          fill
-          quality={85}
-          loading="lazy"
-          className="object-cover"
-          sizes="100vw"
-        />
-        {/* Gradient overlay - darker at top, fades to solid at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/90 via-[#0a0a0f]/85 to-[#0a0a0f]" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <ScrollReveal className="text-center mb-16">
-          <span className="text-[#00d4ff] text-sm font-medium tracking-wider uppercase mb-4 block">
-            About Riverstone Labs
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-            Enterprise AI Systems That Work
-          </h2>
-          <p className="text-lg text-[#a1a1aa] max-w-3xl mx-auto">
-            We are a specialist AI consultancy focused on one thing: getting AI
-            systems into production and delivering measurable business value.
-          </p>
-        </ScrollReveal>
-
-        {/* Our Approach */}
-        <ScrollReveal className="mb-16">
-          <div className="bg-[#12121a] rounded-2xl p-8 md:p-12 border border-white/5">
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">
-              Our Approach
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-[#00d4ff] font-bold">1</span>
-                </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  Research & Strategy
-                </h4>
-                <p className="text-[#a1a1aa] text-sm">
-                  We evaluate your needs against the rapidly evolving AI
-                  landscape
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-[#00d4ff] font-bold">2</span>
-                </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  Rapid Prototyping
-                </h4>
-                <p className="text-[#a1a1aa] text-sm">
-                  Validate concepts quickly with working prototypes
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-[#00d4ff] font-bold">3</span>
-                </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  Production Engineering
-                </h4>
-                <p className="text-[#a1a1aa] text-sm">
-                  Build robust, scalable systems designed for real-world
-                  operation
-                </p>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Capabilities */}
+    <section id="about" className="py-24 bg-[#242424]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Image */}
           <ScrollReveal>
-            <h3 className="text-2xl font-bold text-white mb-6">Capabilities</h3>
-            <div className="space-y-4">
-              {capabilities.map((capability, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#00d4ff] mt-0.5 shrink-0" />
-                  <span className="text-[#a1a1aa]">{capability}</span>
+            <div className="relative">
+              <div className="aspect-[4/5] relative rounded-lg overflow-hidden bg-[#1a1a1a]">
+                {/* Placeholder for founder image */}
+                <div className="absolute inset-0 flex items-center justify-center bg-[#1a1a1a]">
+                  <div className="text-center p-8">
+                    <div className="w-32 h-32 rounded-full bg-[#4a7c59]/20 mx-auto mb-4 flex items-center justify-center">
+                      <span className="text-4xl font-bold text-[#6b9b7a]">WM</span>
+                    </div>
+                    <p className="text-[#6b6b6b] text-sm">Founder photo placeholder</p>
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-8">
-              {[
-                "Machine Learning",
-                "LLMs",
-                "System Design",
-                "Production AI",
-              ].map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="bg-[#1a1a24] text-[#a1a1aa] border border-white/10 hover:border-[#00d4ff]/30 transition-colors"
-                >
-                  {tag}
-                </Badge>
-              ))}
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-[#4a7c59]/30 rounded-lg -z-10" />
             </div>
           </ScrollReveal>
 
-          {/* Values */}
+          {/* Content */}
           <ScrollReveal delay={0.2}>
-            <h3 className="text-2xl font-bold text-white mb-6">How We Work</h3>
-            <div className="space-y-6">
-              {values.map((value, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center shrink-0">
-                    <value.icon className="w-5 h-5 text-[#00d4ff]" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">
-                      {value.title}
-                    </h4>
-                    <p className="text-[#a1a1aa] text-sm">
-                      {value.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Team Statement */}
-            <div className="mt-8 pt-8 border-t border-white/5">
-              <p className="text-[#a1a1aa] leading-relaxed">
-                Our specialists combine deep technical expertise with practical
-                business experience. We have built AI systems across finance,
-                healthcare, technology, and government sectors.
+            <div>
+              <span className="text-[#6b9b7a] text-sm font-medium tracking-wider uppercase mb-4 block">
+                About
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#f5f5f0] mb-6 leading-tight">
+                Practitioners, not pitch decks
+              </h2>
+              <p className="text-lg text-[#a0a0a0] leading-relaxed mb-6">
+                Riverstone Labs is led by Warwick McIntosh, who spent 15 years in technology leadership roles before founding the firm. We&apos;ve been operators. We know the difference between a demo and a production system.
               </p>
+
+              {/* Credentials */}
+              <div className="space-y-3 mb-8">
+                {credentials.map((credential, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-[#6b9b7a] shrink-0 mt-0.5" />
+                    <span className="text-[#a0a0a0]">{credential}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Philosophy */}
+              <div className="bg-[#1a1a1a] rounded-lg p-6 border border-[#333333]">
+                <p className="text-[#f5f5f0] italic leading-relaxed">
+                  &ldquo;We only take work where we can deliver measurable value. If we can&apos;t help, we&apos;ll tell you — and point you to someone who can.&rdquo;
+                </p>
+                <p className="text-[#6b9b7a] mt-4 font-medium">
+                  — Warwick McIntosh, Founder
+                </p>
+              </div>
             </div>
           </ScrollReveal>
         </div>
