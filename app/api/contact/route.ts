@@ -84,7 +84,7 @@ export async function GET() {
 }
 
 // POST endpoint to submit contact form
-export async function POST(request: NextRequest) {
+export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     // Check rate limit
     const clientIP = getClientIP(request);
