@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+// Server startup logging
+if (typeof window === 'undefined') {
+  console.log('[Server] Riverstone Labs website starting up...');
+  console.log('[Server] NODE_ENV:', process.env.NODE_ENV);
+  console.log('[Server] PORT:', process.env.PORT || 3000);
+}
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

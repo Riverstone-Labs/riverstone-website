@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { logEnvironmentStatus } from '@/lib/env-validation';
+
+// Log environment status on first load
+logEnvironmentStatus();
 
 // Rate limiting store (in production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
