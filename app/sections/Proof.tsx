@@ -6,6 +6,7 @@ import { ScrollReveal } from "../components/ScrollReveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import Image from "next/image";
 
 const caseStudies = [
   {
@@ -57,8 +58,23 @@ export function Proof() {
   };
 
   return (
-    <section id="proof" className="py-24 bg-[#12121a]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="proof" className="relative py-24 bg-[#12121a] overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/proof-transformation.webp"
+          alt="Abstract transformation and growth visualization"
+          fill
+          quality={85}
+          loading="lazy"
+          className="object-cover opacity-15"
+          sizes="100vw"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-[#12121a]/80" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-16">
           <span className="text-[#00d4ff] text-sm font-medium tracking-wider uppercase mb-4 block">

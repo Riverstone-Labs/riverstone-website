@@ -10,6 +10,7 @@ import {
   GraduationCap,
   ArrowRight 
 } from "lucide-react";
+import Image from "next/image";
 
 const services = [
   {
@@ -52,8 +53,23 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-24 bg-[#0a0a0f]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="relative py-24 bg-[#0a0a0f] overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/services-abstract.webp"
+          alt="Abstract interconnected modules visualization"
+          fill
+          quality={85}
+          loading="lazy"
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-[#0a0a0f]/85" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-16">
           <span className="text-[#00d4ff] text-sm font-medium tracking-wider uppercase mb-4 block">

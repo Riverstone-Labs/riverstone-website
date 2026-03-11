@@ -9,18 +9,54 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Send, Users, Sparkles } from "lucide-react";
 
+// Input sanitization helper
+const sanitizeInput = (value: string): string => {
+  return value
+    .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
+    .trim()
+    .slice(0, 1000); // Limit length
+};
+
 export function CTA() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     message: "",
+    website: "", // Honeypot field - should remain empty
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+  
+  // Newsletter form state
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError("");
+    
+    // Honeypot check - if this field is filled, it's likely a bot
+    if (formData.website) {
+      console.log('Honeypot triggered - possible bot submission');
+      return;
+    }
+    
+    // Validate inputs
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setFormError("Please fill in all required fields.");
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setFormError("Please enter a valid email address.");
+      return;
+    }
+    
     setIsSubmitting(true);
     
     // Simulate form submission
@@ -31,10 +67,30 @@ export function CTA() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: sanitizeInput(value)
     }));
+  };
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newsletterEmail)) {
+      return;
+    }
+    
+    setNewsletterSubmitting(true);
+    
+    // Simulate subscription
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    setNewsletterSubmitting(false);
+    setNewsletterSubmitted(true);
+    setNewsletterEmail("");
   };
 
   return (
@@ -76,16 +132,37 @@ export function CTA() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Honeypot field - hidden from users, visible to bots */}
+                    <div className="absolute opacity-0 pointer-events-none" aria-hidden="true">
+                      <label htmlFor="website">Website</label>
+                      <Input
+                        id="website"
+                        name="website"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formData.website}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    
+                    {formError && (
+                      <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                        {formError}
+                      </div>
+                    )}
+                    
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
-                          Name
+                          Name *
                         </label>
                         <Input
                           id="name"
                           name="name"
                           type="text"
                           required
+                          maxLength={100}
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="John Doe"
@@ -94,13 +171,14 @@ export function CTA() {
                       </div>
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-                          Email
+                          Email *
                         </label>
                         <Input
                           id="email"
                           name="email"
                           type="email"
                           required
+                          maxLength={100}
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="john@company.com"
@@ -117,6 +195,7 @@ export function CTA() {
                         id="company"
                         name="company"
                         type="text"
+                        maxLength={100}
                         value={formData.company}
                         onChange={handleChange}
                         placeholder="Acme Inc."
@@ -126,18 +205,22 @@ export function CTA() {
                     
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
-                        Tell us about your project
+                        Tell us about your project *
                       </label>
                       <Textarea
                         id="message"
                         name="message"
                         required
+                        maxLength={1000}
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="What challenges are you facing? What are your goals?"
                         rows={4}
                         className="bg-[#0a0a0f] border-white/10 text-white placeholder:text-[#71717a] focus:border-[#00d4ff]/50 resize-none"
                       />
+                      <p className="text-xs text-[#71717a] mt-1 text-right">
+                        {formData.message.length}/1000
+                      </p>
                     </div>
                     
                     <Button
@@ -213,7 +296,7 @@ export function CTA() {
                     <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 flex items-center justify-center shrink-0">
                       <Sparkles className="w-6 h-6 text-[#00d4ff]" />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <h3 className="text-lg font-semibold text-white mb-1">
                         AI Insights Newsletter
                       </h3>
@@ -221,20 +304,34 @@ export function CTA() {
                         Weekly insights on AI strategy, implementation patterns, and industry trends.
                       </p>
                       
-                      <form className="flex gap-2">
-                        <Input
-                          type="email"
-                          placeholder="Enter your email"
-                          className="bg-[#0a0a0f] border-white/10 text-white placeholder:text-[#71717a] focus:border-[#00d4ff]/50 text-sm"
-                        />
-                        <Button
-                          type="submit"
-                          size="sm"
-                          className="bg-[#00d4ff] hover:bg-[#00d4ff]/90 text-[#0a0a0f] font-semibold shrink-0"
-                        >
-                          Subscribe
-                        </Button>
-                      </form>
+                      {newsletterSubmitted ? (
+                        <div className="flex items-center gap-2 text-green-400 text-sm">
+                          <CheckCircle className="w-4 h-4" />
+                          <span>Thanks for subscribing!</span>
+                        </div>
+                      ) : (
+                        <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                          <Input
+                            type="email"
+                            name="newsletter-email"
+                            placeholder="Enter your email"
+                            aria-label="Email address for newsletter subscription"
+                            required
+                            maxLength={100}
+                            value={newsletterEmail}
+                            onChange={(e) => setNewsletterEmail(sanitizeInput(e.target.value))}
+                            className="bg-[#0a0a0f] border-white/10 text-white placeholder:text-[#71717a] focus:border-[#00d4ff]/50 text-sm"
+                          />
+                          <Button
+                            type="submit"
+                            size="sm"
+                            disabled={newsletterSubmitting}
+                            className="bg-[#00d4ff] hover:bg-[#00d4ff]/90 text-[#0a0a0f] font-semibold shrink-0 disabled:opacity-50"
+                          >
+                            {newsletterSubmitting ? '...' : 'Subscribe'}
+                          </Button>
+                        </form>
+                      )}
                     </div>
                   </div>
                 </CardContent>

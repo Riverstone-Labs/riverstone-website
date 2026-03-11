@@ -4,6 +4,7 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/Scrol
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
+import Image from "next/image";
 
 const articles = [
   {
@@ -34,8 +35,23 @@ const articles = [
 
 export function Content() {
   return (
-    <section id="content" className="py-24 bg-[#12121a]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="content" className="relative py-24 bg-[#12121a] overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/content-insights.webp"
+          alt="Abstract insights and data visualization"
+          fill
+          quality={85}
+          loading="lazy"
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-[#12121a]/85" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
           <div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { ParticleNetwork } from "../components/ParticleNetwork";
+import Image from "next/image";
 
 export function Hero() {
   const scrollToNext = () => {
@@ -15,6 +16,21 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-neural-architecture.webp"
+          alt="Neural network architecture visualization"
+          fill
+          priority
+          quality={85}
+          className="object-cover"
+          sizes="100vw"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-[#0a0a0f]/70" />
+      </div>
+
       {/* Particle Network Background */}
       <ParticleNetwork />
 
