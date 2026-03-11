@@ -31,6 +31,9 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
+# Ensure public directory exists (create if missing)
+RUN mkdir -p ./public
+
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -45,5 +48,5 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
-# Start the application with logging
-CMD ["sh", "-c", "echo 'Starting Riverstone Labs server on port ${PORT}...' && node server.js"]
+# Start the application with logging and verification
+CMD ["sh", "-c", "echo 'Starting Riverstone Labs server on port ${PORT}...' && echo 'Checking server.js exists...' && ls -la server.js && echo 'Checking public directory...' && ls -la public/ && echo 'Starting server...' && node server.js"
