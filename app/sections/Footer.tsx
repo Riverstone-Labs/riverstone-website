@@ -41,10 +41,13 @@ export function Footer() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#f59e0b] flex items-center justify-center">
                 <span className="text-white font-bold text-sm">R</span>
               </div>
-              <span className="text-xl font-bold text-white">Riverstone Labs</span>
+              <span className="text-xl font-bold text-white">
+                Riverstone Labs
+              </span>
             </div>
             <p className="text-sm text-[#71717a] leading-relaxed mb-6">
-              Premium AI consultancy delivering production-ready systems that drive real business results.
+              Premium AI consultancy delivering production-ready systems that
+              drive real business results.
             </p>
             <div className="flex gap-3">
               {footerLinks.connect.map((link) => (
@@ -130,12 +133,18 @@ export function Footer() {
           <p className="text-sm text-[#71717a]">
             © {new Date().getFullYear()} Riverstone Labs. All rights reserved.
           </p>
-          
+
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-[#71717a] hover:text-white transition-colors">
+            <a
+              href="#"
+              className="text-sm text-[#71717a] hover:text-white transition-colors"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="text-sm text-[#71717a] hover:text-white transition-colors">
+            <a
+              href="#"
+              className="text-sm text-[#71717a] hover:text-white transition-colors"
+            >
               Terms of Service
             </a>
             <button

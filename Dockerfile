@@ -7,8 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
-RUN npm install sharp
+RUN npm ci && npm install sharp
 
 # Copy source code
 COPY . .

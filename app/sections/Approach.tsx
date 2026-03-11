@@ -1,6 +1,10 @@
 "use client";
 
-import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
+import {
+  ScrollReveal,
+  StaggerContainer,
+  StaggerItem,
+} from "../components/ScrollReveal";
 import { Compass, Code, GraduationCap } from "lucide-react";
 
 const phases = [
@@ -8,22 +12,40 @@ const phases = [
     icon: Compass,
     title: "Strategy",
     subtitle: "Weeks 1-2",
-    description: "We start by understanding your business objectives, data landscape, and technical constraints. No solution before problem definition.",
-    deliverables: ["AI readiness assessment", "Use case prioritization", "Technical architecture", "ROI projections"],
+    description:
+      "We start by understanding your business objectives, data landscape, and technical constraints. No solution before problem definition.",
+    deliverables: [
+      "AI readiness assessment",
+      "Use case prioritization",
+      "Technical architecture",
+      "ROI projections",
+    ],
   },
   {
     icon: Code,
     title: "Build",
     subtitle: "Weeks 3-10",
-    description: "Rapid, iterative development with continuous validation. Production-grade code, not prototype-quality experiments.",
-    deliverables: ["Production-ready system", "CI/CD pipeline", "Monitoring & observability", "Documentation"],
+    description:
+      "Rapid, iterative development with continuous validation. Production-grade code, not prototype-quality experiments.",
+    deliverables: [
+      "Production-ready system",
+      "CI/CD pipeline",
+      "Monitoring & observability",
+      "Documentation",
+    ],
   },
   {
     icon: GraduationCap,
     title: "Handover",
     subtitle: "Weeks 11-12",
-    description: "Knowledge transfer that sticks. Your team owns the solution, understands the system, and can evolve it independently.",
-    deliverables: ["Team training sessions", "Code walkthroughs", "Runbook creation", "30-day support period"],
+    description:
+      "Knowledge transfer that sticks. Your team owns the solution, understands the system, and can evolve it independently.",
+    deliverables: [
+      "Team training sessions",
+      "Code walkthroughs",
+      "Runbook creation",
+      "30-day support period",
+    ],
   },
 ];
 
@@ -40,7 +62,7 @@ export function Approach() {
             Our Proven Process
           </h2>
           <p className="text-lg text-[#a1a1aa] max-w-2xl mx-auto">
-            A battle-tested methodology that takes you from idea to production 
+            A battle-tested methodology that takes you from idea to production
             in 12 weeks—without the usual consulting baggage.
           </p>
         </ScrollReveal>
@@ -53,7 +75,10 @@ export function Approach() {
           </div>
 
           {/* Phase Cards */}
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 relative" staggerDelay={0.2}>
+          <StaggerContainer
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 relative"
+            staggerDelay={0.2}
+          >
             {phases.map((phase, index) => (
               <StaggerItem key={index}>
                 <div className="group relative">
@@ -92,7 +117,10 @@ export function Approach() {
                         </h4>
                         <ul className="space-y-2">
                           {phase.deliverables.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm text-[#a1a1aa]">
+                            <li
+                              key={i}
+                              className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                            >
                               <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff] mt-1.5 shrink-0" />
                               {item}
                             </li>

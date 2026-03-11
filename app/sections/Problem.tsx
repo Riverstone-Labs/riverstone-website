@@ -1,27 +1,34 @@
 "use client";
 
-import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
+import {
+  ScrollReveal,
+  StaggerContainer,
+  StaggerItem,
+} from "../components/ScrollReveal";
 import { Target, AlertTriangle, Users } from "lucide-react";
 
 const problems = [
   {
     icon: Target,
     title: "The Strategy Gap",
-    description: "AI without business alignment. Projects that solve technical problems instead of business problems, leading to expensive solutions nobody asked for.",
+    description:
+      "AI without business alignment. Projects that solve technical problems instead of business problems, leading to expensive solutions nobody asked for.",
     stat: "67%",
     statLabel: "of AI projects fail to align with business goals",
   },
   {
     icon: AlertTriangle,
     title: "The Implementation Trap",
-    description: "POCs that never scale. Impressive demos that crumble under real-world load, data drift, and operational complexity.",
+    description:
+      "POCs that never scale. Impressive demos that crumble under real-world load, data drift, and operational complexity.",
     stat: "87%",
     statLabel: "of ML models never reach production",
   },
   {
     icon: Users,
     title: "The Dependency Problem",
-    description: "Consultants who never leave. External teams that build black-box systems, leaving you dependent on their continued involvement.",
+    description:
+      "Consultants who never leave. External teams that build black-box systems, leaving you dependent on their continued involvement.",
     stat: "$500K",
     statLabel: "average annual vendor lock-in cost",
   },
@@ -40,13 +47,17 @@ export function Problem() {
             Why Most AI Projects Fail
           </h2>
           <p className="text-lg text-[#a1a1aa] max-w-2xl mx-auto">
-            After working with dozens of enterprises, we have seen the same patterns repeat. 
-            Here is why AI initiatives struggle—and how we fix them.
+            After working with dozens of enterprises, we have seen the same
+            patterns repeat. Here is why AI initiatives struggle—and how we fix
+            them.
           </p>
         </ScrollReveal>
 
         {/* Problem Cards */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6" staggerDelay={0.15}>
+        <StaggerContainer
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          staggerDelay={0.15}
+        >
           {problems.map((problem, index) => (
             <StaggerItem key={index}>
               <div className="group relative h-full">
@@ -54,7 +65,7 @@ export function Problem() {
                 <div className="relative h-full bg-[#12121a] rounded-2xl p-8 border border-white/5 transition-all duration-300 hover:border-[#00d4ff]/30 hover:bg-[#1a1a24]">
                   {/* Glow effect on hover */}
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00d4ff]/5 to-[#f59e0b]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   <div className="relative z-10">
                     {/* Icon */}
                     <div className="w-14 h-14 rounded-xl bg-[#1a1a24] border border-white/10 flex items-center justify-center mb-6 group-hover:border-[#00d4ff]/30 transition-colors duration-300">

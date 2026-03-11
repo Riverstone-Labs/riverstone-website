@@ -12,7 +12,7 @@ import { CheckCircle, Send, Users, Sparkles, AlertCircle } from "lucide-react";
 // Input sanitization helper
 const sanitizeInput = (value: string): string => {
   return value
-    .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
+    .replace(/[<>]/g, "") // Remove < and > to prevent HTML injection
     .trim()
     .slice(0, 1000); // Limit length
 };
@@ -29,7 +29,7 @@ export function CTA() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
-  
+
   // Newsletter form state
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
@@ -37,46 +37,50 @@ export function CTA() {
 
   // Fetch CSRF token on mount
   useEffect(() => {
-    fetch('/api/contact')
-      .then(res => res.json())
-      .then(data => {
+    fetch("/api/contact")
+      .then((res) => res.json())
+      .then((data) => {
         if (data.csrfToken) {
           setCsrfToken(data.csrfToken);
         }
       })
-      .catch(err => console.error('Failed to fetch CSRF token:', err));
+      .catch((err) => console.error("Failed to fetch CSRF token:", err));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError("");
-    
+
     // Honeypot check - if this field is filled, it's likely a bot
     if (formData.website) {
-      console.log('Honeypot triggered - possible bot submission');
+      console.log("Honeypot triggered - possible bot submission");
       return;
     }
-    
+
     // Validate inputs
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
       setFormError("Please fill in all required fields.");
       return;
     }
-    
+
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setFormError("Please enter a valid email address.");
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formData.name,
@@ -87,15 +91,15 @@ export function CTA() {
           csrfToken: csrfToken,
         }),
       });
-      
+
       const data = await response.json();
-      
+
       if (response.ok && data.success) {
         setIsSubmitted(true);
         // Fetch new CSRF token for next submission
-        fetch('/api/contact')
-          .then(res => res.json())
-          .then(data => {
+        fetch("/api/contact")
+          .then((res) => res.json())
+          .then((data) => {
             if (data.csrfToken) {
               setCsrfToken(data.csrfToken);
             }
@@ -104,35 +108,39 @@ export function CTA() {
         setFormError(data.error || "Failed to send message. Please try again.");
       }
     } catch (error) {
-      console.error('Form submission error:', error);
-      setFormError("Network error. Please check your connection and try again.");
+      console.error("Form submission error:", error);
+      setFormError(
+        "Network error. Please check your connection and try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: sanitizeInput(value)
+      [name]: sanitizeInput(value),
     }));
   };
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(newsletterEmail)) {
       return;
     }
-    
+
     setNewsletterSubmitting(true);
-    
+
     // Simulate subscription (implement real newsletter API later)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     setNewsletterSubmitting(false);
     setNewsletterSubmitted(true);
     setNewsletterEmail("");
@@ -142,7 +150,7 @@ export function CTA() {
     <section id="cta" className="py-24 bg-[#0a0a0f] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-b from-[#00d4ff]/10 to-transparent rounded-full blur-3xl opacity-30 pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-16">
@@ -153,8 +161,9 @@ export function CTA() {
             Ready to Make AI Work?
           </h2>
           <p className="text-lg text-[#a1a1aa] max-w-2xl mx-auto">
-            Book a free 30-minute assessment. We will discuss your challenges, 
-            evaluate opportunities, and outline a path forward—no commitment required.
+            Book a free 30-minute assessment. We will discuss your challenges,
+            evaluate opportunities, and outline a path forward—no commitment
+            required.
           </p>
         </ScrollReveal>
 
@@ -172,13 +181,17 @@ export function CTA() {
                       Message Sent!
                     </h3>
                     <p className="text-[#a1a1aa]">
-                      Thank you for reaching out. We will get back to you within 24 hours.
+                      Thank you for reaching out. We will get back to you within
+                      24 hours.
                     </p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Honeypot field - hidden from users, visible to bots */}
-                    <div className="absolute opacity-0 pointer-events-none" aria-hidden="true">
+                    <div
+                      className="absolute opacity-0 pointer-events-none"
+                      aria-hidden="true"
+                    >
                       <label htmlFor="website">Website</label>
                       <Input
                         id="website"
@@ -190,17 +203,20 @@ export function CTA() {
                         onChange={handleChange}
                       />
                     </div>
-                    
+
                     {formError && (
                       <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-2">
                         <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
                         <span>{formError}</span>
                       </div>
                     )}
-                    
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
                           Name *
                         </label>
                         <Input
@@ -216,7 +232,10 @@ export function CTA() {
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
                           Email *
                         </label>
                         <Input
@@ -232,9 +251,12 @@ export function CTA() {
                         />
                       </div>
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="company" className="block text-sm font-medium text-white mb-2">
+                      <label
+                        htmlFor="company"
+                        className="block text-sm font-medium text-white mb-2"
+                      >
                         Company
                       </label>
                       <Input
@@ -248,9 +270,12 @@ export function CTA() {
                         className="bg-[#0a0a0f] border-white/10 text-white placeholder:text-[#71717a] focus:border-[#00d4ff]/50"
                       />
                     </div>
-                    
+
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
+                      <label
+                        htmlFor="message"
+                        className="block text-sm font-medium text-white mb-2"
+                      >
                         Tell us about your project *
                       </label>
                       <Textarea
@@ -268,7 +293,7 @@ export function CTA() {
                         {formData.message.length}/1000
                       </p>
                     </div>
-                    
+
                     <Button
                       type="submit"
                       disabled={isSubmitting}
@@ -276,9 +301,24 @@ export function CTA() {
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
-                          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          <svg
+                            className="animate-spin h-4 w-4"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                              fill="none"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            />
                           </svg>
                           Sending...
                         </span>
@@ -289,7 +329,7 @@ export function CTA() {
                         </span>
                       )}
                     </Button>
-                    
+
                     <p className="text-xs text-[#71717a] text-center">
                       We respect your privacy. No spam, ever.
                     </p>
@@ -317,19 +357,27 @@ export function CTA() {
                       ))}
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-white">50+ Companies Helped</div>
-                      <div className="text-xs text-[#71717a]">Across 12 industries</div>
+                      <div className="text-sm font-semibold text-white">
+                        50+ Companies Helped
+                      </div>
+                      <div className="text-xs text-[#71717a]">
+                        Across 12 industries
+                      </div>
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
                     <div>
                       <div className="text-2xl font-bold text-white">4.9/5</div>
-                      <div className="text-xs text-[#71717a]">Average client rating</div>
+                      <div className="text-xs text-[#71717a]">
+                        Average client rating
+                      </div>
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-white">95%</div>
-                      <div className="text-xs text-[#71717a]">Would recommend</div>
+                      <div className="text-xs text-[#71717a]">
+                        Would recommend
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -347,16 +395,20 @@ export function CTA() {
                         AI Insights Newsletter
                       </h3>
                       <p className="text-sm text-[#a1a1aa] mb-4">
-                        Weekly insights on AI strategy, implementation patterns, and industry trends.
+                        Weekly insights on AI strategy, implementation patterns,
+                        and industry trends.
                       </p>
-                      
+
                       {newsletterSubmitted ? (
                         <div className="flex items-center gap-2 text-green-400 text-sm">
                           <CheckCircle className="w-4 h-4" />
                           <span>Thanks for subscribing!</span>
                         </div>
                       ) : (
-                        <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                        <form
+                          onSubmit={handleNewsletterSubmit}
+                          className="flex gap-2"
+                        >
                           <Input
                             type="email"
                             name="newsletter-email"
@@ -365,7 +417,9 @@ export function CTA() {
                             required
                             maxLength={100}
                             value={newsletterEmail}
-                            onChange={(e) => setNewsletterEmail(sanitizeInput(e.target.value))}
+                            onChange={(e) =>
+                              setNewsletterEmail(sanitizeInput(e.target.value))
+                            }
                             className="bg-[#0a0a0f] border-white/10 text-white placeholder:text-[#71717a] focus:border-[#00d4ff]/50 text-sm"
                           />
                           <Button
@@ -374,7 +428,7 @@ export function CTA() {
                             disabled={newsletterSubmitting}
                             className="bg-[#00d4ff] hover:bg-[#00d4ff]/90 text-[#0a0a0f] font-semibold shrink-0 disabled:opacity-50"
                           >
-                            {newsletterSubmitting ? '...' : 'Subscribe'}
+                            {newsletterSubmitting ? "..." : "Subscribe"}
                           </Button>
                         </form>
                       )}
@@ -385,15 +439,24 @@ export function CTA() {
 
               {/* Trust Badges */}
               <div className="flex flex-wrap gap-2">
-                <Badge variant="outline" className="border-white/10 text-[#71717a]">
+                <Badge
+                  variant="outline"
+                  className="border-white/10 text-[#71717a]"
+                >
                   <CheckCircle className="w-3 h-3 mr-1 text-green-500" />
                   No Obligation
                 </Badge>
-                <Badge variant="outline" className="border-white/10 text-[#71717a]">
+                <Badge
+                  variant="outline"
+                  className="border-white/10 text-[#71717a]"
+                >
                   <CheckCircle className="w-3 h-3 mr-1 text-green-500" />
                   24hr Response
                 </Badge>
-                <Badge variant="outline" className="border-white/10 text-[#71717a]">
+                <Badge
+                  variant="outline"
+                  className="border-white/10 text-[#71717a]"
+                >
                   <CheckCircle className="w-3 h-3 mr-1 text-green-500" />
                   Confidential
                 </Badge>

@@ -17,18 +17,20 @@ const values = [
   {
     icon: Rocket,
     title: "Production-First",
-    description: "We build systems designed for real-world operation from day one."
+    description:
+      "We build systems designed for real-world operation from day one.",
   },
   {
     icon: Users,
     title: "Knowledge Transfer",
-    description: "Your team owns the solution. We ensure they can maintain and evolve it independently."
+    description:
+      "Your team owns the solution. We ensure they can maintain and evolve it independently.",
   },
   {
     icon: Shield,
     title: "Business Value",
-    description: "Technology serves business goals—not the other way around."
-  }
+    description: "Technology serves business goals—not the other way around.",
+  },
 ];
 
 export function About() {
@@ -59,36 +61,52 @@ export function About() {
             Enterprise AI Systems That Work
           </h2>
           <p className="text-lg text-[#a1a1aa] max-w-3xl mx-auto">
-            We are a specialist AI consultancy focused on one thing: getting AI systems into production 
-            and delivering measurable business value.
+            We are a specialist AI consultancy focused on one thing: getting AI
+            systems into production and delivering measurable business value.
           </p>
         </ScrollReveal>
 
         {/* Our Approach */}
         <ScrollReveal className="mb-16">
           <div className="bg-[#12121a] rounded-2xl p-8 md:p-12 border border-white/5">
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">Our Approach</h3>
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">
+              Our Approach
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center mx-auto mb-4">
                   <span className="text-[#00d4ff] font-bold">1</span>
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">Research & Strategy</h4>
-                <p className="text-[#a1a1aa] text-sm">We evaluate your needs against the rapidly evolving AI landscape</p>
+                <h4 className="text-lg font-semibold text-white mb-2">
+                  Research & Strategy
+                </h4>
+                <p className="text-[#a1a1aa] text-sm">
+                  We evaluate your needs against the rapidly evolving AI
+                  landscape
+                </p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center mx-auto mb-4">
                   <span className="text-[#00d4ff] font-bold">2</span>
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">Rapid Prototyping</h4>
-                <p className="text-[#a1a1aa] text-sm">Validate concepts quickly with working prototypes</p>
+                <h4 className="text-lg font-semibold text-white mb-2">
+                  Rapid Prototyping
+                </h4>
+                <p className="text-[#a1a1aa] text-sm">
+                  Validate concepts quickly with working prototypes
+                </p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center mx-auto mb-4">
                   <span className="text-[#00d4ff] font-bold">3</span>
                 </div>
-                <h4 className="text-lg font-semibold text-white mb-2">Production Engineering</h4>
-                <p className="text-[#a1a1aa] text-sm">Build robust, scalable systems designed for real-world operation</p>
+                <h4 className="text-lg font-semibold text-white mb-2">
+                  Production Engineering
+                </h4>
+                <p className="text-[#a1a1aa] text-sm">
+                  Build robust, scalable systems designed for real-world
+                  operation
+                </p>
               </div>
             </div>
           </div>
@@ -109,10 +127,15 @@ export function About() {
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mt-8">
-              {["Machine Learning", "LLMs", "System Design", "Production AI"].map((tag) => (
-                <Badge 
+              {[
+                "Machine Learning",
+                "LLMs",
+                "System Design",
+                "Production AI",
+              ].map((tag) => (
+                <Badge
                   key={tag}
-                  variant="secondary" 
+                  variant="secondary"
                   className="bg-[#1a1a24] text-[#a1a1aa] border border-white/10 hover:border-[#00d4ff]/30 transition-colors"
                 >
                   {tag}
@@ -131,8 +154,12 @@ export function About() {
                     <value.icon className="w-5 h-5 text-[#00d4ff]" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">{value.title}</h4>
-                    <p className="text-[#a1a1aa] text-sm">{value.description}</p>
+                    <h4 className="text-lg font-semibold text-white mb-1">
+                      {value.title}
+                    </h4>
+                    <p className="text-[#a1a1aa] text-sm">
+                      {value.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -141,8 +168,9 @@ export function About() {
             {/* Team Statement */}
             <div className="mt-8 pt-8 border-t border-white/5">
               <p className="text-[#a1a1aa] leading-relaxed">
-                Our specialists combine deep technical expertise with practical business experience. 
-                We have built AI systems across finance, healthcare, technology, and government sectors.
+                Our specialists combine deep technical expertise with practical
+                business experience. We have built AI systems across finance,
+                healthcare, technology, and government sectors.
               </p>
             </div>
           </ScrollReveal>

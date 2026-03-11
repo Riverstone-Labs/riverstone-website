@@ -52,7 +52,9 @@ export function Hero() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1a24] border border-white/10 mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-[#00d4ff] animate-pulse" />
-            <span className="text-sm text-[#a1a1aa]">Premium AI Consultancy</span>
+            <span className="text-sm text-[#a1a1aa]">
+              Premium AI Consultancy
+            </span>
           </motion.div>
 
           {/* Headline */}
@@ -64,8 +66,9 @@ export function Hero() {
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-[#a1a1aa] max-w-2xl mx-auto mb-10 leading-relaxed">
-            We transform AI from expensive experiments into production systems that 
-            deliver measurable business results. Strategy, build, and handover—done right.
+            We transform AI from expensive experiments into production systems
+            that deliver measurable business results. Strategy, build, and
+            handover—done right.
           </p>
 
           {/* CTAs */}
