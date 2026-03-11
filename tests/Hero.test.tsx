@@ -15,30 +15,24 @@ vi.mock('framer-motion', () => ({
   }),
 }));
 
-// Mock ParticleNetwork
-vi.mock('../app/components/ParticleNetwork', () => ({
-  ParticleNetwork: () => <div data-testid="particle-network">Particle Network</div>,
-}));
-
 describe('Hero', () => {
-  it('renders the hero section', () => {
+  it('renders the hero section with new headline', () => {
     render(<Hero />);
     
-    expect(screen.getByText('AI Implementation')).toBeInTheDocument();
-    expect(screen.getByText('That Actually Works')).toBeInTheDocument();
+    expect(screen.getByText("We don't do pilots.")).toBeInTheDocument();
+    expect(screen.getByText("We do transformation.")).toBeInTheDocument();
   });
 
-  it('renders CTA buttons', () => {
+  it('renders the subheadline about boutique service', () => {
     render(<Hero />);
     
-    expect(screen.getByRole('button', { name: /Book Free Assessment/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /See Our Approach/i })).toBeInTheDocument();
+    expect(screen.getByText(/Boutique AI implementation for enterprises ready to move beyond experiments/i)).toBeInTheDocument();
+    expect(screen.getByText(/Only 10 clients per year/i)).toBeInTheDocument();
   });
 
-  it('renders stats', () => {
+  it('renders CTA button', () => {
     render(<Hero />);
     
-    expect(screen.getByText('50+')).toBeInTheDocument();
-    expect(screen.getByText('AI Systems Deployed')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Book a Consultation/i })).toBeInTheDocument();
   });
 });
