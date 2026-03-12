@@ -40,7 +40,7 @@ const differentiators = [
   {
     icon: Target,
     title: "We Build, Not Just Advise",
-    description: "Most consultants give you a PDF and leave. We stay until AI is actually working in your business, measuring results in revenue, efficiency, and growth.",
+    description: &quot;Most consultants give you a PDF and leave. We stay until AI is actually working in your business, measuring results in revenue, efficiency, and growth.",
   },
   {
     icon: TrendingUp,
@@ -143,7 +143,7 @@ export default function AboutPage() {
                 </p>
                 <blockquote className="border-l-4 border-[#3b82f6] pl-6 my-8">
                   <p className="text-white italic text-xl leading-relaxed">
-                    "Most AI consultancies don't actually build anything. We're here to change that — one working system at a time."
+                    &quot;Most AI consultancies don't actually build anything. We're here to change that — one working system at a time.&quot;
                   </p>
                   <footer className="text-[#3b82f6] mt-2 not-italic">
                     — Warwick McIntosh, Founder
