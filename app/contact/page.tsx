@@ -14,7 +14,6 @@ import {
   AlertCircle,
   Mail,
   MapPin,
-  Phone,
   Clock
 } from "lucide-react";
 
