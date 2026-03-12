@@ -8,9 +8,6 @@ import { Button } from "@/components/ui/button";
 const pricingPlans = [
   {
     name: "Starter",
-    price: "$2,500",
-    period: "/month",
-    description: "Perfect for businesses beginning their AI journey",
     features: [
       "AI readiness assessment",
       "Basic automation setup",
@@ -18,14 +15,10 @@ const pricingPlans = [
       "Email support",
       "1 AI use case implementation",
     ],
-    cta: "Get Started",
     popular: false,
   },
   {
     name: "Professional",
-    price: "$5,000",
-    period: "/month",
-    description: "Full AI transformation for growing businesses",
     features: [
       "Everything in Starter",
       "Custom ML model development",
@@ -35,14 +28,10 @@ const pricingPlans = [
       "Quarterly strategy reviews",
       "Data analytics dashboard",
     ],
-    cta: "Most Popular",
     popular: true,
   },
   {
     name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "Tailored solutions for large organizations",
     features: [
       "Everything in Professional",
       "Unlimited AI use cases",
@@ -52,7 +41,6 @@ const pricingPlans = [
       "On-premise deployment options",
       "Executive reporting",
     ],
-    cta: "Contact Us",
     popular: false,
   },
 ];
@@ -100,14 +88,7 @@ export function Pricing() {
                   <h3 className="text-xl font-semibold text-white mb-2">
                     {plan.name}
                   </h3>
-                  <p className="text-[#71717a] text-sm">{plan.description}</p>
-                </div>
-
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-white">
-                    {plan.price}
-                  </span>
-                  <span className="text-[#71717a]">{plan.period}</span>
+                  <p className="text-[#71717a] text-sm">Pricing tailored to your scope and requirements</p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-grow">
@@ -133,7 +114,7 @@ export function Pricing() {
                       : "border border-[#27272a] hover:border-[#3b82f6] bg-transparent text-white hover:bg-transparent"
                   }`}
                 >
-                  {plan.cta}
+                  Book a Consultation
                 </Button>
               </motion.div>
             </ScrollReveal>
