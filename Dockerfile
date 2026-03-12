@@ -3,11 +3,14 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Increase Node.js memory limit for build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 COPY package*.json ./
 RUN npm ci && npm install sharp
 
 COPY . .
-RUN npm run build
+RUN npm run build 2>&1
 
 # Production stage
 FROM node:20-alpine AS runner
