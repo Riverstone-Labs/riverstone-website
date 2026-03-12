@@ -1,70 +1,79 @@
 "use client";
 
-import { Linkedin } from "lucide-react";
+import { Linkedin, Mail, MapPin } from "lucide-react";
+import Link from "next/link";
 
 const footerLinks = [
-  { label: "Approach", href: "#approach" },
-  { label: "Proof", href: "#proof" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-  { label: "Privacy", href: "#" },
+  { label: "Services", href: "/services" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Footer() {
-  const scrollToSection = (href: string) => {
-    if (href.startsWith("#")) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   return (
-    <footer className="bg-[#1a1a1a] border-t border-[#333333]">
+    <footer className="bg-[#0a0a0a] border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo and Tagline */}
-          <div className="text-center md:text-left">
-            <a href="#" className="text-2xl font-semibold text-[#f5f5f0] tracking-tight">
-              Riverstone
-            </a>
-            <p className="text-sm text-[#6b6b6b] mt-1">
-              We don&apos;t do pilots. We do transformation.
+          <div>
+            <Link href="/" className="text-2xl font-semibold text-white tracking-tight">
+              Riverstone Labs
+            </Link>
+            <p className="text-sm text-gray-500 mt-2">
+              AI That Works. Results That Scale.
             </p>
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6">
+          <nav className="flex flex-col gap-2">
+            <span className="text-sm font-medium text-white mb-2">Quick Links</span>
             {footerLinks.map((link) => (
-              <button
+              <Link
                 key={link.label}
-                onClick={() => scrollToSection(link.href)}
-                className="text-sm text-[#a0a0a0] hover:text-[#f5f5f0] transition-colors duration-200"
+                href={link.href}
+                className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
               >
                 {link.label}
-              </button>
+              </Link>
             ))}
           </nav>
 
-          {/* Social */}
-          <div className="flex items-center gap-4">
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#6b6b6b] hover:text-[#f5f5f0] transition-colors duration-200"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
+          {/* Contact Info */}
+          <div>
+            <span className="text-sm font-medium text-white mb-2 block">Contact</span>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <MapPin className="w-4 h-4" />
+                <span>Brisbane, Australia</span>
+              </div>
+              <a 
+                href="mailto:hello@riverstonelabs.com.au"
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                <Mail className="w-4 h-4" />
+                <span>hello@riverstonelabs.com.au</span>
+              </a>
+            </div>
+            
+            {/* Social */}
+            <div className="flex items-center gap-4 mt-4">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-white transition-colors duration-200"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-[#333333] text-center">
-          <p className="text-sm text-[#6b6b6b]">
-            © {new Date().getFullYear()} Riverstone Labs. All rights reserved.
+        <div className="pt-8 border-t border-gray-800 text-center">
+          <p className="text-sm text-gray-500">
+            &copy; 2026 Riverstone Labs Pty Ltd. All rights reserved.
           </p>
         </div>
       </div>

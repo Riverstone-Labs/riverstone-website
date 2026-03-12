@@ -1,8 +1,8 @@
 import { Navigation } from "./components/Navigation";
 import { Hero } from "./sections/Hero";
 import { Problem } from "./sections/Problem";
-import { Approach } from "./sections/Approach";
-import { Proof } from "./sections/Proof";
+import { Services } from "./sections/Services";
+import { SocialProof } from "./sections/SocialProof";
 import { About } from "./sections/About";
 import { CTA } from "./sections/CTA";
 import { Footer } from "./sections/Footer";
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-[#1a1a1a]">
+      <main className="min-h-screen bg-[#0a0a0a]">
         <ErrorBoundary sectionName="Hero">
           <Hero />
         </ErrorBoundary>
@@ -21,12 +21,12 @@ export default function Home() {
           <Problem />
         </ErrorBoundary>
         
-        <ErrorBoundary sectionName="Our Approach">
-          <Approach />
+        <ErrorBoundary sectionName="Services">
+          <Services />
         </ErrorBoundary>
         
-        <ErrorBoundary sectionName="Proof of Value">
-          <Proof />
+        <ErrorBoundary sectionName="Social Proof">
+          <SocialProof />
         </ErrorBoundary>
         
         <ErrorBoundary sectionName="About">

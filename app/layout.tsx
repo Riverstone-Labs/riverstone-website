@@ -22,25 +22,25 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Riverstone Labs | AI Implementation That Actually Works",
-  description: "Premium AI consultancy specializing in strategy, LLM applications, RAG systems, and production-ready AI solutions. We build AI that delivers real business results.",
-  keywords: ["AI consultancy", "LLM development", "RAG systems", "AI strategy", "machine learning", "AI implementation"],
+  title: "Riverstone Labs | AI That Works. Results That Scale.",
+  description: "Premium AI consultancy helping Brisbane and Australian businesses implement AI that delivers real ROI. Strategy, build, and handover — we make AI actually work for your business.",
+  keywords: ["AI consultancy", "AI implementation", "AI strategy", "Brisbane AI", "Australian AI consultancy", "business AI", "ROI-focused AI"],
   authors: [{ name: "Riverstone Labs" }],
   creator: "Riverstone Labs",
   publisher: "Riverstone Labs",
   robots: "index, follow",
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://riverstone.ai",
+    locale: "en_AU",
+    url: "https://riverstonelabs.com.au",
     siteName: "Riverstone Labs",
-    title: "Riverstone Labs | AI Implementation That Actually Works",
-    description: "Premium AI consultancy specializing in strategy, LLM applications, RAG systems, and production-ready AI solutions.",
+    title: "Riverstone Labs | AI That Works. Results That Scale.",
+    description: "Premium AI consultancy helping Australian businesses implement AI that delivers real ROI.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Riverstone Labs | AI Implementation That Actually Works",
-    description: "Premium AI consultancy specializing in strategy, LLM applications, RAG systems, and production-ready AI solutions.",
+    title: "Riverstone Labs | AI That Works. Results That Scale.",
+    description: "Premium AI consultancy helping Australian businesses implement AI that delivers real ROI.",
   },
 };
 
@@ -52,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0a0a0f] text-white`}
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0a0a0a] text-white`}
       >
         {children}
       </body>

@@ -20,9 +20,9 @@ export function CTA() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     company: "",
     message: "",
-    maturity: "",
     website: "", // Honeypot field
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -40,7 +40,7 @@ export function CTA() {
     }
 
     // Validate inputs
-    if (!formData.name.trim() || !formData.email.trim() || !formData.company.trim() || !formData.message.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.company.trim()) {
       setFormError("Please fill in all required fields.");
       return;
     }
@@ -54,39 +54,30 @@ export function CTA() {
 
     setIsSubmitting(true);
 
+    // Log to console (MVP requirement)
+    console.log("Lead Form Submission:", {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      message: formData.message,
+      submittedAt: new Date().toISOString(),
+    });
+
+    // Simulate API call
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          message: formData.message,
-          maturity: formData.maturity,
-          website: formData.website,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setIsSubmitted(true);
-      } else {
-        setFormError(data.error || "Failed to send message. Please try again.");
-      }
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Form submission error:", error);
-      setFormError("Network error. Please check your connection and try again.");
+      setFormError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -96,31 +87,46 @@ export function CTA() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#1a1a1a]">
+    <section id="contact" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Column - Value Proposition */}
           <ScrollReveal>
             <div>
-              <span className="text-[#6b9b7a] text-sm font-medium tracking-wider uppercase mb-4 block">
+              <span className="text-[#3b82f6] text-sm font-medium tracking-wider uppercase mb-4 block">
                 Get Started
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#f5f5f0] mb-6">
-                Start with a conversation
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Actually Use AI in Your Business?
               </h2>
-              <p className="text-lg text-[#a0a0a0] leading-relaxed mb-8">
-                We don&apos;t do sales calls. We do discovery sessions — 30 minutes to understand your context and determine if there&apos;s a fit. No pitch deck required.
+              <p className="text-lg text-gray-400 leading-relaxed mb-8">
+                Book a free 30-minute strategy call. No hard sell — just honest advice on what&apos;s possible for your business.
               </p>
               
               <div className="space-y-4">
-                <p className="text-[#a0a0a0]">
-                  <span className="text-[#f5f5f0] font-medium">Or email directly:</span>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Free 30-minute strategy session</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Honest assessment of AI opportunities</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                  <span className="text-gray-300">Clear next steps — no obligation</span>
+                </div>
+              </div>
+
+              <div className="mt-8 p-6 bg-[#111111] rounded-lg border border-gray-800">
+                <p className="text-gray-400 text-sm">
+                  <span className="text-white font-medium">Prefer to email?</span>
                   <br />
                   <a 
-                    href="mailto:warwick@riverstone.ai" 
-                    className="text-[#6b9b7a] hover:underline"
+                    href="mailto:hello@riverstonelabs.com.au" 
+                    className="text-[#3b82f6] hover:underline"
                   >
-                    warwick@riverstone.ai
+                    hello@riverstonelabs.com.au
                   </a>
                 </p>
               </div>
@@ -129,18 +135,18 @@ export function CTA() {
 
           {/* Right Column - Contact Form */}
           <ScrollReveal delay={0.2}>
-            <Card className="bg-[#242424] border-[#333333]">
+            <Card className="bg-[#111111] border-gray-800">
               <CardContent className="p-8">
                 {isSubmitted ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 rounded-full bg-[#4a7c59]/20 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle className="w-8 h-8 text-[#6b9b7a]" />
+                    <div className="w-16 h-16 rounded-full bg-[#3b82f6]/20 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-8 h-8 text-[#3b82f6]" />
                     </div>
-                    <h3 className="text-xl font-semibold text-[#f5f5f0] mb-2">
-                      Thanks — we&apos;ll be in touch within 24 hours
+                    <h3 className="text-xl font-semibold text-white mb-2">
+                      Thanks! We&apos;ll be in touch within 24 hours.
                     </h3>
-                    <p className="text-[#a0a0a0]">
-                      We&apos;ve received your message and will respond shortly.
+                    <p className="text-gray-400">
+                      We&apos;ve received your message and will respond shortly to schedule your strategy call.
                     </p>
                   </div>
                 ) : (
@@ -170,7 +176,7 @@ export function CTA() {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium text-[#f5f5f0] mb-2"
+                          className="block text-sm font-medium text-white mb-2"
                         >
                           Name *
                         </label>
@@ -183,13 +189,13 @@ export function CTA() {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="Your name"
-                          className="bg-[#1a1a1a] border-[#333333] text-[#f5f5f0] placeholder:text-[#6b6b6b] focus:border-[#4a7c59]"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
                         />
                       </div>
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium text-[#f5f5f0] mb-2"
+                          className="block text-sm font-medium text-white mb-2"
                         >
                           Email *
                         </label>
@@ -202,72 +208,69 @@ export function CTA() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="you@company.com"
-                          className="bg-[#1a1a1a] border-[#333333] text-[#f5f5f0] placeholder:text-[#6b6b6b] focus:border-[#4a7c59]"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label
+                          htmlFor="phone"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
+                          Phone
+                        </label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          maxLength={50}
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="Your phone (optional)"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="company"
+                          className="block text-sm font-medium text-white mb-2"
+                        >
+                          Company Name *
+                        </label>
+                        <Input
+                          id="company"
+                          name="company"
+                          type="text"
+                          required
+                          maxLength={100}
+                          value={formData.company}
+                          onChange={handleChange}
+                          placeholder="Your company"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
                         />
                       </div>
                     </div>
 
                     <div>
                       <label
-                        htmlFor="company"
-                        className="block text-sm font-medium text-[#f5f5f0] mb-2"
-                      >
-                        Company *
-                      </label>
-                      <Input
-                        id="company"
-                        name="company"
-                        type="text"
-                        required
-                        maxLength={100}
-                        value={formData.company}
-                        onChange={handleChange}
-                        placeholder="Your company"
-                        className="bg-[#1a1a1a] border-[#333333] text-[#f5f5f0] placeholder:text-[#6b6b6b] focus:border-[#4a7c59]"
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="maturity"
-                        className="block text-sm font-medium text-[#f5f5f0] mb-2"
-                      >
-                        Current AI maturity
-                      </label>
-                      <select
-                        id="maturity"
-                        name="maturity"
-                        value={formData.maturity}
-                        onChange={handleChange}
-                        className="w-full h-10 px-3 rounded-md bg-[#1a1a1a] border border-[#333333] text-[#f5f5f0] focus:border-[#4a7c59] focus:outline-none focus:ring-1 focus:ring-[#4a7c59]"
-                      >
-                        <option value="">Select an option</option>
-                        <option value="exploring">Exploring</option>
-                        <option value="piloting">Piloting</option>
-                        <option value="scaling">Scaling</option>
-                        <option value="stuck">Stuck</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label
                         htmlFor="message"
-                        className="block text-sm font-medium text-[#f5f5f0] mb-2"
+                        className="block text-sm font-medium text-white mb-2"
                       >
-                        What are you trying to solve? *
+                        Message / Requirements
                       </label>
                       <Textarea
                         id="message"
                         name="message"
-                        required
                         maxLength={1000}
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Tell us about your challenges and goals..."
                         rows={4}
-                        className="bg-[#1a1a1a] border-[#333333] text-[#f5f5f0] placeholder:text-[#6b6b6b] focus:border-[#4a7c59] resize-none"
+                        className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6] resize-none"
                       />
-                      <p className="text-xs text-[#6b6b6b] mt-1 text-right">
+                      <p className="text-xs text-gray-500 mt-1 text-right">
                         {formData.message.length}/1000
                       </p>
                     </div>
@@ -275,7 +278,7 @@ export function CTA() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#4a7c59] hover:bg-[#5a8c69] text-[#f5f5f0] font-semibold py-6 rounded-sm transition-all duration-300 disabled:opacity-50"
+                      className="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold py-6 rounded-sm transition-all duration-300 disabled:opacity-50"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
@@ -303,7 +306,7 @@ export function CTA() {
                       ) : (
                         <span className="flex items-center gap-2">
                           <Send className="w-4 h-4" />
-                          Request a discovery session
+                          Book My Strategy Call
                         </span>
                       )}
                     </Button>

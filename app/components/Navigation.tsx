@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const navLinks = [
-  { href: "#approach", label: "Approach" },
-  { href: "#proof", label: "Proof" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navigation() {
@@ -24,8 +24,8 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -39,43 +39,43 @@ export function Navigation() {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#1a1a1a]/95 backdrop-blur-sm border-b border-[#333333]"
+            ? "bg-[#0a0a0a]/95 backdrop-blur-sm border-b border-gray-800"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a href="#" className="text-2xl font-semibold text-[#f5f5f0] tracking-tight">
-              Riverstone
-            </a>
+            <Link href="/" className="text-2xl font-semibold text-white tracking-tight">
+              Riverstone Labs
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-[#a0a0a0] hover:text-[#f5f5f0] transition-colors duration-200 text-sm font-medium"
+                  href={link.href}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
               <Button
-                onClick={() => scrollToSection("#contact")}
-                className="bg-[#4a7c59] hover:bg-[#5a8c69] text-[#f5f5f0] font-medium px-6 py-2 rounded-sm transition-colors duration-200"
+                onClick={scrollToContact}
+                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium px-6 py-2 rounded-sm transition-colors duration-200"
               >
-                Start a conversation
+                Book a Call
               </Button>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-[#f5f5f0] p-2"
+              className="md:hidden text-white p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -92,23 +92,24 @@ export function Navigation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[#1a1a1a] pt-20 px-4 md:hidden"
+            className="fixed inset-0 z-40 bg-[#0a0a0a] pt-20 px-4 md:hidden"
           >
             <div className="flex flex-col gap-6">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-xl text-[#f5f5f0] font-medium py-2 text-left"
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-xl text-white font-medium py-2 text-left"
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
               <Button
-                onClick={() => scrollToSection("#contact")}
-                className="bg-[#4a7c59] hover:bg-[#5a8c69] text-[#f5f5f0] font-medium py-3 rounded-sm mt-4"
+                onClick={scrollToContact}
+                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium py-3 rounded-sm mt-4"
               >
-                Start a conversation
+                Book a Call
               </Button>
             </div>
           </motion.div>

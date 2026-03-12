@@ -3,7 +3,7 @@
 import { useState, useRef, useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, ArrowRight } from "lucide-react";
 
 // Hook to detect reduced motion preference without causing setState in effect
 function usePrefersReducedMotion(): boolean {
@@ -76,14 +76,14 @@ export function Hero() {
         )}
         
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Pause/Play Control - visible on hover/focus */}
       {!prefersReducedMotion && (
         <button
           onClick={togglePlay}
-          className="absolute bottom-24 right-4 md:right-8 z-20 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity duration-300 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-[#4a7c59]"
+          className="absolute bottom-24 right-4 md:right-8 z-20 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity duration-300 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
           aria-label={isPlaying ? "Pause video" : "Play video"}
         >
           {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -98,15 +98,15 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 text-[#f5f5f0] leading-tight">
-            We don&apos;t do pilots.
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white leading-tight">
+            AI That Works.
             <br />
-            <span className="text-[#6b9b7a]">We do transformation.</span>
+            <span className="text-[#3b82f6]">Results That Scale.</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-[#a0a0a0] max-w-2xl mx-auto mb-12 leading-relaxed">
-            Riverstone Labs helps ambitious businesses implement AI that actually works — and keeps working after we leave.
+          <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+            We implement AI that delivers real ROI — strategy, build, and handover. For businesses ready to actually use AI to grow.
           </p>
 
           {/* CTA */}
@@ -114,23 +114,24 @@ export function Hero() {
             <Button
               size="lg"
               onClick={() => scrollToSection("contact")}
-              className="bg-[#4a7c59] hover:bg-[#5a8c69] text-[#f5f5f0] font-semibold px-10 py-6 text-base rounded-sm transition-all duration-300"
+              className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold px-10 py-6 text-base rounded-sm transition-all duration-300"
             >
-              Start a conversation
+              Book Your AI Strategy Call
             </Button>
             
             <button
-              onClick={() => scrollToSection("approach")}
-              className="text-[#a0a0a0] hover:text-[#f5f5f0] transition-colors duration-200 text-sm font-medium underline underline-offset-4"
+              onClick={() => scrollToSection("proof")}
+              className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium underline underline-offset-4 flex items-center gap-2"
             >
-              See how we work
+              See Our Work
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </motion.div>
       </div>
 
       {/* Bottom gradient for section transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1a1a1a] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
     </section>
   );
 }

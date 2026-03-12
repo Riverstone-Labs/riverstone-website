@@ -38,20 +38,20 @@ describe('Hero', () => {
   it('renders the hero section with headline', () => {
     render(<Hero />);
     
-    expect(screen.getByText("We don't do pilots.")).toBeInTheDocument();
-    expect(screen.getByText("We do transformation.")).toBeInTheDocument();
+    expect(screen.getByText("AI That Works.")).toBeInTheDocument();
+    expect(screen.getByText("Results That Scale.")).toBeInTheDocument();
   });
 
   it('renders the subheadline', () => {
     render(<Hero />);
     
-    expect(screen.getByText(/Riverstone Labs helps ambitious businesses implement AI that actually works/i)).toBeInTheDocument();
+    expect(screen.getByText(/We implement AI that delivers real ROI/i)).toBeInTheDocument();
   });
 
   it('renders CTA buttons', () => {
     render(<Hero />);
     
-    expect(screen.getByRole('button', { name: /Start a conversation/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /See how we work/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Book Your AI Strategy Call/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /See Our Work/i })).toBeInTheDocument();
   });
 });
