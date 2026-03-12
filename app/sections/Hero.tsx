@@ -83,7 +83,7 @@ export function Hero() {
       {!prefersReducedMotion && (
         <button
           onClick={togglePlay}
-          className="absolute bottom-24 right-4 md:right-8 z-20 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity duration-300 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+          className="absolute bottom-24 right-4 md:right-8 z-20 opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity duration-300 w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-[#10b981]"
           aria-label={isPlaying ? "Pause video" : "Play video"}
         >
           {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -101,7 +101,7 @@ export function Hero() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white leading-tight">
             AI That Works.
             <br />
-            <span className="text-[#3b82f6]">Results That Scale.</span>
+            <span className="text-[#10b981]">Results That Scale.</span>
           </h1>
 
           {/* Subheadline */}
@@ -114,7 +114,7 @@ export function Hero() {
             <Button
               size="lg"
               onClick={() => scrollToSection("contact")}
-              className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold px-10 py-6 text-base rounded-sm transition-all duration-300"
+              className="bg-[#10b981] hover:bg-[#059669] text-white font-semibold px-10 py-6 text-base rounded-sm transition-all duration-300"
             >
               Book Your AI Strategy Call
             </Button>

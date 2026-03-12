@@ -93,7 +93,7 @@ export function CTA() {
           {/* Left Column - Value Proposition */}
           <ScrollReveal>
             <div>
-              <span className="text-[#3b82f6] text-sm font-medium tracking-wider uppercase mb-4 block">
+              <span className="text-[#10b981] text-sm font-medium tracking-wider uppercase mb-4 block">
                 Get Started
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
@@ -105,15 +105,15 @@ export function CTA() {
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#10b981] shrink-0 mt-0.5" />
                   <span className="text-gray-300">Free 30-minute strategy session</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#10b981] shrink-0 mt-0.5" />
                   <span className="text-gray-300">Honest assessment of AI opportunities</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-[#10b981] shrink-0 mt-0.5" />
                   <span className="text-gray-300">Clear next steps — no obligation</span>
                 </div>
               </div>
@@ -124,7 +124,7 @@ export function CTA() {
                   <br />
                   <a 
                     href="mailto:hello@riverstonelabs.com.au" 
-                    className="text-[#3b82f6] hover:underline"
+                    className="text-[#10b981] hover:underline"
                   >
                     hello@riverstonelabs.com.au
                   </a>
@@ -139,8 +139,8 @@ export function CTA() {
               <CardContent className="p-8">
                 {isSubmitted ? (
                   <div className="text-center py-12">
-                    <div className="w-16 h-16 rounded-full bg-[#3b82f6]/20 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle className="w-8 h-8 text-[#3b82f6]" />
+                    <div className="w-16 h-16 rounded-full bg-[#10b981]/20 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-8 h-8 text-[#10b981]" />
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">
                       Thanks! We&apos;ll be in touch within 24 hours.
@@ -189,7 +189,7 @@ export function CTA() {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="Your name"
-                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#10b981]"
                         />
                       </div>
                       <div>
@@ -208,7 +208,7 @@ export function CTA() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="you@company.com"
-                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#10b981]"
                         />
                       </div>
                     </div>
@@ -229,7 +229,7 @@ export function CTA() {
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="Your phone (optional)"
-                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#10b981]"
                         />
                       </div>
                       <div>
@@ -248,7 +248,7 @@ export function CTA() {
                           value={formData.company}
                           onChange={handleChange}
                           placeholder="Your company"
-                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6]"
+                          className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#10b981]"
                         />
                       </div>
                     </div>
@@ -268,7 +268,7 @@ export function CTA() {
                         onChange={handleChange}
                         placeholder="Tell us about your challenges and goals..."
                         rows={4}
-                        className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#3b82f6] resize-none"
+                        className="bg-[#0a0a0a] border-gray-700 text-white placeholder:text-gray-500 focus:border-[#10b981] resize-none"
                       />
                       <p className="text-xs text-gray-500 mt-1 text-right">
                         {formData.message.length}/1000
@@ -278,7 +278,7 @@ export function CTA() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-white font-semibold py-6 rounded-sm transition-all duration-300 disabled:opacity-50"
+                      className="w-full bg-[#10b981] hover:bg-[#059669] text-white font-semibold py-6 rounded-sm transition-all duration-300 disabled:opacity-50"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
