@@ -85,20 +85,37 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
-    // Log to console (MVP requirement)
-    console.log("Contact Form Submission:", {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      company: formData.company,
-      message: formData.message,
-      submittedAt: new Date().toISOString(),
-    });
-
-    // Simulate API call
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsSubmitted(true);
+      // Submit to lead API
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          message: "",
+          website: "",
+        });
+      } else {
+        setFormError(data.error || "Something went wrong. Please try again.");
+      }
     } catch (error) {
       console.error("Form submission error:", error);
       setFormError("Something went wrong. Please try again.");

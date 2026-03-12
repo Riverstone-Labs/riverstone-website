@@ -1,0 +1,2 @@
+# This file ensures the data directory exists in git
+# Leads will be stored in leads.json
