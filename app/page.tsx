@@ -1,8 +1,9 @@
 import { Navigation } from "./components/Navigation";
 import { Hero } from "./sections/Hero";
+import { Problem } from "./sections/Problem";
+import { Approach } from "./sections/Approach";
 import { Services } from "./sections/Services";
-import { CaseStudies } from "./sections/CaseStudies";
-import { About } from "./sections/About";
+import { SocialProof } from "./sections/SocialProof";
 import { Pricing } from "./sections/Pricing";
 import { CTA } from "./sections/CTA";
 import { Footer } from "./sections/Footer";
@@ -17,16 +18,20 @@ export default function Home() {
           <Hero />
         </ErrorBoundary>
 
+        <ErrorBoundary sectionName="Problem">
+          <Problem />
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="Approach">
+          <Approach />
+        </ErrorBoundary>
+
         <ErrorBoundary sectionName="Services">
           <Services />
         </ErrorBoundary>
 
-        <ErrorBoundary sectionName="Case Studies">
-          <CaseStudies />
-        </ErrorBoundary>
-
-        <ErrorBoundary sectionName="About">
-          <About />
+        <ErrorBoundary sectionName="Results">
+          <SocialProof />
         </ErrorBoundary>
 
         <ErrorBoundary sectionName="Pricing">

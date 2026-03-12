@@ -10,6 +10,7 @@ const navLinks = [
   { id: "approach", label: "Approach" },
   { id: "services", label: "Services" },
   { id: "social-proof", label: "Results" },
+  { id: "pricing", label: "Pricing" },
 ];
 
 export function Navigation() {
