@@ -6,12 +6,18 @@ import { logEnvironmentStatus } from '@/lib/env-validation';
 // Log environment status on first load
 logEnvironmentStatus();
 
-// Initialize Resend with API key
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // Email configuration
 const EMAIL_RECIPIENT = 'warwick@riverstonelabs.com.au';
 const EMAIL_FROM = 'contact@riverstonelabs.com.au';
+
+// Lazy initialization of Resend client
+let resend: Resend | null = null;
+function getResendClient(): Resend | null {
+  if (!resend && process.env.RESEND_API_KEY) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resend;
+}
 
 // Rate limiting store (in production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
@@ -160,27 +166,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     });
     
     // Send email using Resend
-    try {
-      await resend.emails.send({
-        from: EMAIL_FROM,
-        to: EMAIL_RECIPIENT,
-        subject: `New Contact Form Submission from ${sanitizedName}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${sanitizedName}</p>
-          <p><strong>Email:</strong> ${sanitizedEmail}</p>
-          <p><strong>Company:</strong> ${sanitizedData.company || 'Not provided'}</p>
-          <p><strong>Message:</strong></p>
-          <p>${sanitizedData.message.replace(/\n/g, '<br>')}</p>
-          <hr>
-          <p><small>Submitted from IP: ${clientIP} at ${sanitizedData.timestamp}</small></p>
-        `,
-      });
-      console.log('Email sent successfully to:', EMAIL_RECIPIENT);
-    } catch (emailError) {
-      console.error('Failed to send email:', emailError);
-      // Continue to return success to user even if email fails
-      // The form submission is still logged
+    const resendClient = getResendClient();
+    if (resendClient) {
+      try {
+        await resendClient.emails.send({
+          from: EMAIL_FROM,
+          to: EMAIL_RECIPIENT,
+          subject: `New Contact Form Submission from ${sanitizedName}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${sanitizedName}</p>
+            <p><strong>Email:</strong> ${sanitizedEmail}</p>
+            <p><strong>Company:</strong> ${sanitizedData.company || 'Not provided'}</p>
+            <p><strong>Message:</strong></p>
+            <p>${sanitizedData.message.replace(/\n/g, '<br>')}</p>
+            <hr>
+            <p><small>Submitted from IP: ${clientIP} at ${sanitizedData.timestamp}</small></p>
+          `,
+        });
+        console.log('Email sent successfully to:', EMAIL_RECIPIENT);
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError);
+        // Continue to return success to user even if email fails
+        // The form submission is still logged
+      }
+    } else {
+      console.log('Resend not configured - email not sent, but form logged');
     }
     
     // Clear CSRF token after successful submission
