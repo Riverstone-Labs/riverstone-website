@@ -67,7 +67,7 @@ export function Navigation() {
             <div className="hidden md:block">
               <Button
                 onClick={scrollToContact}
-                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium px-6 py-2 rounded-sm transition-colors duration-200"
+                className="bg-[#10b981] hover:bg-[#059669] text-white font-medium px-6 py-2 rounded-sm transition-colors duration-200"
               >
                 Book a Call
               </Button>
@@ -107,7 +107,7 @@ export function Navigation() {
               ))}
               <Button
                 onClick={scrollToContact}
-                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium py-3 rounded-sm mt-4"
+                className="bg-[#10b981] hover:bg-[#059669] text-white font-medium py-3 rounded-sm mt-4"
               >
                 Book a Call
               </Button>
