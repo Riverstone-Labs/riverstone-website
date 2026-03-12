@@ -1,19 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Sora, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-geist-sans",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Riverstone Labs | AI Implementation That Delivers ROI",
-  description: "Turn AI hype into real business ROI. We implement AI that actually works. Get a dedicated AI team for a fraction of the cost of hiring in-house — with measurable returns in 90 days.",
-  keywords: "AI consultancy, AI implementation, Brisbane AI, SMB AI, ROI from AI, artificial intelligence consulting",
+  title: "Riverstone Labs | AI That Actually Works",
+  description: "AI That Actually Works. Revenue That Actually Grows. We implement AI solutions that deliver measurable ROI. Not chatbots that nobody uses. Not AI theatre. Real business outcomes.",
+  keywords: "AI consultancy, AI implementation, Brisbane AI, SMB AI, ROI from AI, artificial intelligence consulting, Australia AI",
   openGraph: {
-    title: "Riverstone Labs | AI Implementation That Delivers ROI",
-    description: "Turn AI hype into real business ROI. We implement AI that actually works for your business.",
+    title: "Riverstone Labs | AI That Actually Works",
+    description: "We implement AI solutions that deliver measurable ROI. Real business outcomes for Australian SMBs.",
     type: "website",
   },
 };
@@ -25,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${sora.variable} ${dmSans.variable} ${jetBrainsMono.variable} font-sans antialiased bg-[#0A0A0F] text-white`}>
         {children}
       </body>
     </html>

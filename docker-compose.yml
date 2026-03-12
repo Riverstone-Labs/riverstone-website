@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "4200:3000"
+    restart: "on-failure:3"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: "1.0"
