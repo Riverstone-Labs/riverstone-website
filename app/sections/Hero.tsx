@@ -15,9 +15,19 @@ export function Hero() {
       id="hero" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #0a1628 0%, #1a2744 50%, #0d1b2a 100%)'
+        backgroundImage: 'url(/images/hero-bg.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
+      {/* Dark overlay for text readability */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: 'rgba(0,0,0,0.6)'
+        }}
+      />
+
       {/* Gradient overlay for depth */}
       <div 
         className="absolute inset-0 z-0"
