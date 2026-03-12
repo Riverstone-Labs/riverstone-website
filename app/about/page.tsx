@@ -40,7 +40,7 @@ const differentiators = [
   {
     icon: Target,
     title: "We Build, Not Just Advise",
-    description: "Most consultants give you a PDF and leave. We stay until AI is actually working in your business, measuring results in revenue, efficiency, and growth.",
+    description: &quot;Most consultants give you a PDF and leave. We stay until AI is actually working in your business, measuring results in revenue, efficiency, and growth.",
   },
   {
     icon: TrendingUp,
@@ -136,14 +136,14 @@ export default function AboutPage() {
                   After 15 years in technology leadership roles — building engineering teams, implementing AI systems, and leading digital transformation — I saw a consistent pattern. Companies were investing heavily in AI strategy and consulting, but very few were seeing actual results.
                 </p>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  The problem wasn't a lack of AI knowledge. It was a gap between strategy and implementation. Consultants would deliver impressive PowerPoints and theoretical frameworks, but when it came time to actually build and deploy working AI systems, the execution fell short.
+                  The problem wasn&apos;t a lack of AI knowledge. It was a gap between strategy and implementation. Consultants would deliver impressive PowerPoints and theoretical frameworks, but when it came time to actually build and deploy working AI systems, the execution fell short.
                 </p>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  I founded Riverstone Labs to fill that gap. We're not here to give you advice and leave. We're here to build working AI systems that drive real ROI — and stay until your team can run them independently.
+                  I founded Riverstone Labs to fill that gap. We&apos;re not here to give you advice and leave. We&apos;re here to build working AI systems that drive real ROI — and stay until your team can run them independently.
                 </p>
                 <blockquote className="border-l-4 border-[#3b82f6] pl-6 my-8">
                   <p className="text-white italic text-xl leading-relaxed">
-                    "Most AI consultancies don't actually build anything. We're here to change that — one working system at a time."
+                    &quot;Most AI consultancies don&apos;t actually build anything. We&apos;re here to change that — one working system at a time.&quot;
                   </p>
                   <footer className="text-[#3b82f6] mt-2 not-italic">
                     — Warwick McIntosh, Founder
