@@ -3,11 +3,17 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Install build dependencies for sharp and other native modules
+RUN apk add --no-cache python3 make g++
+
+# Increase Node.js memory limit for build
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 COPY package*.json ./
 RUN npm ci && npm install sharp
 
 COPY . .
-RUN npm run build
+RUN npm run build 2>&1 || (echo "=== BUILD FAILED ===" && cat /app/.next/error.log 2>/dev/null || echo "No error log found" && exit 1)
 
 # Production stage
 FROM node:20-alpine AS runner
