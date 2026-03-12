@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { Resend } from 'resend';
 import { logEnvironmentStatus } from '@/lib/env-validation';
 
 // Log environment status on first load
 logEnvironmentStatus();
+
+// Initialize Resend with API key
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Email configuration
+const EMAIL_RECIPIENT = 'warwick@riverstonelabs.com.au';
+const EMAIL_FROM = 'contact@riverstonelabs.com.au';
 
 // Rate limiting store (in production, use Redis or database)
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
@@ -145,14 +153,35 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       timestamp: new Date().toISOString()
     };
     
-    // Log submission (in production, send email or save to database)
+    // Log submission
     console.log('Contact form submission:', {
       ...sanitizedData,
       email: sanitizedData.email.substring(0, 3) + '***@***' // Partially mask email in logs
     });
     
-    // TODO: Integrate with email service (SendGrid, AWS SES, etc.) or form backend
-    // Example: await sendEmail(sanitizedData);
+    // Send email using Resend
+    try {
+      await resend.emails.send({
+        from: EMAIL_FROM,
+        to: EMAIL_RECIPIENT,
+        subject: `New Contact Form Submission from ${sanitizedName}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${sanitizedName}</p>
+          <p><strong>Email:</strong> ${sanitizedEmail}</p>
+          <p><strong>Company:</strong> ${sanitizedData.company || 'Not provided'}</p>
+          <p><strong>Message:</strong></p>
+          <p>${sanitizedData.message.replace(/\n/g, '<br>')}</p>
+          <hr>
+          <p><small>Submitted from IP: ${clientIP} at ${sanitizedData.timestamp}</small></p>
+        `,
+      });
+      console.log('Email sent successfully to:', EMAIL_RECIPIENT);
+    } catch (emailError) {
+      console.error('Failed to send email:', emailError);
+      // Continue to return success to user even if email fails
+      // The form submission is still logged
+    }
     
     // Clear CSRF token after successful submission
     return NextResponse.json(
