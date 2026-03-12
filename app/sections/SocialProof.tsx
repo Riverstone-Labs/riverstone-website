@@ -27,7 +27,7 @@ const caseStudies = [
 
 export function SocialProof() {
   return (
-    <section id="proof" className="py-24 bg-[#0a0a0a]">
+    <section id="social-proof" className="py-24 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-16">

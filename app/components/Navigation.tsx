@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { id: "problem", label: "Problem" },
+  { id: "approach", label: "Approach" },
+  { id: "services", label: "Services" },
+  { id: "social-proof", label: "Results" },
+  { id: "pricing", label: "Pricing" },
 ];
 
 export function Navigation() {
@@ -24,8 +25,9 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToContact = () => {
-    const element = document.getElementById("contact");
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -46,28 +48,39 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="text-2xl font-semibold text-white tracking-tight">
+            <a 
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="text-2xl font-semibold text-white tracking-tight hover:text-blue-400 transition-colors"
+            >
               Riverstone Labs
-            </Link>
+            </a>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={(e) => scrollToSection(e, link.id)}
                   className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
               <Button
-                onClick={scrollToContact}
-                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium px-6 py-2 rounded-sm transition-colors duration-200"
+                onClick={() => {
+                  const element = document.getElementById("contact");
+                  if (element) element.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg transition-colors duration-200"
               >
                 Book a Call
               </Button>
@@ -96,18 +109,22 @@ export function Navigation() {
           >
             <div className="flex flex-col gap-6">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-xl text-white font-medium py-2 text-left"
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={(e) => scrollToSection(e, link.id)}
+                  className="text-xl text-white font-medium py-2"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
               <Button
-                onClick={scrollToContact}
-                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white font-medium py-3 rounded-sm mt-4"
+                onClick={() => {
+                  const element = document.getElementById("contact");
+                  if (element) element.scrollIntoView({ behavior: "smooth" });
+                  setIsMobileMenuOpen(false);
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg mt-4"
               >
                 Book a Call
               </Button>

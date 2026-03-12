@@ -76,7 +76,16 @@ export function CaseStudies() {
                   <div className="text-3xl font-bold text-[#10b981] mb-1">
                     {study.metric}
                   </div>
-                  <div className="text-[#a1a1aa] text-sm">{study.metricLabel}</div>
+                  <div className="text-[#a1a1aa] text-sm mb-4">{study.metricLabel}</div>
+                  <a
+                    href="#case-studies"
+                    className="inline-flex items-center text-[#10b981] hover:text-[#34d399] text-sm font-medium transition-colors"
+                  >
+                    Read Case Study
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
                 </div>
               </motion.div>
             </ScrollReveal>

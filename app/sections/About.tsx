@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollReveal } from "../components/ScrollReveal";
-import { CheckCircle, MapPin, Target, Users } from "lucide-react";
+import { CheckCircle, MapPin, Target, Users, TrendingUp } from "lucide-react";
 
 const credentials = [
   "Former CTO with 15+ years building software and AI systems",
@@ -25,6 +25,11 @@ const differentiators = [
     title: "Brisbane-Based, Australia-Wide",
     description: "Local expertise with national reach. We understand the Australian business landscape.",
   },
+  {
+    icon: TrendingUp,
+    title: "We Measure What Matters",
+    description: "Focus on ROI tracking and business outcomes, not vanity metrics. Every project has clear success criteria.",
+  },
 ];
 
 export function About() {
@@ -33,7 +38,7 @@ export function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-16">
-          <span className="text-[#3b82f6] text-sm font-medium tracking-wider uppercase mb-4 block">
+          <span className="text-[#10b981] text-sm font-medium tracking-wider uppercase mb-4 block">
             Why Riverstone Labs?
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
@@ -60,7 +65,7 @@ export function About() {
               <div className="space-y-3 mb-8">
                 {credentials.map((credential, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-[#3b82f6] shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-[#10b981] shrink-0 mt-0.5" />
                     <span className="text-gray-300">{credential}</span>
                   </div>
                 ))}
@@ -71,7 +76,7 @@ export function About() {
                 <p className="text-white italic leading-relaxed">
                   &ldquo;We exist because most AI consultancies don&apos;t actually build anything. We&apos;re here to change that — one working system at a time.&rdquo;
                 </p>
-                <p className="text-[#3b82f6] mt-4 font-medium">
+                <p className="text-[#10b981] mt-4 font-medium">
                   — Warwick McIntosh, Founder
                 </p>
               </div>
@@ -84,8 +89,8 @@ export function About() {
               <div className="aspect-[4/3] relative rounded-lg overflow-hidden bg-[#0a0a0a] border border-gray-800">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center p-8">
-                    <div className="w-32 h-32 rounded-full bg-[#3b82f6]/20 mx-auto mb-4 flex items-center justify-center border border-[#3b82f6]/30">
-                      <span className="text-4xl font-bold text-[#3b82f6]">WM</span>
+                    <div className="w-32 h-32 rounded-full bg-[#10b981]/20 mx-auto mb-4 flex items-center justify-center border border-[#10b981]/30">
+                      <span className="text-4xl font-bold text-[#10b981]">WM</span>
                     </div>
                     <p className="text-white font-medium text-lg">Warwick McIntosh</p>
                     <p className="text-gray-400">Founder & CEO</p>
@@ -93,18 +98,18 @@ export function About() {
                 </div>
               </div>
               {/* Decorative element */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-[#3b82f6]/30 rounded-lg -z-10" />
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-[#10b981]/30 rounded-lg -z-10" />
             </div>
           </ScrollReveal>
         </div>
 
         {/* Differentiators */}
         <ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {differentiators.map((item, index) => (
               <div key={index} className="bg-[#0a0a0a] rounded-lg p-8 border border-gray-800">
-                <div className="w-10 h-10 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center mb-4">
-                  <item.icon className="w-5 h-5 text-[#3b82f6]" />
+                <div className="w-10 h-10 rounded-lg bg-[#10b981]/10 flex items-center justify-center mb-4">
+                  <item.icon className="w-5 h-5 text-[#10b981]" />
                 </div>
                 <h4 className="text-lg font-semibold text-white mb-2">
                   {item.title}
