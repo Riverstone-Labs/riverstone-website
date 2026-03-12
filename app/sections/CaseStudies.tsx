@@ -50,10 +50,10 @@ export function CaseStudies() {
             <ScrollReveal key={index} delay={index * 0.1}>
               <motion.div
                 whileHover={{ y: -8 }}
-                className="bg-[#0a0a0a] p-8 rounded-2xl border border-[#27272a] hover:border-[#10b981]/50 transition-all h-full"
+                className="bg-[#0a0a0a] p-8 rounded-2xl border border-[#27272a] hover:border-[#3b82f6]/50 transition-all h-full"
               >
                 <div className="mb-6">
-                  <span className="text-[#10b981] text-sm font-semibold uppercase tracking-wider">
+                  <span className="text-[#3b82f6] text-sm font-semibold uppercase tracking-wider">
                     Case Study
                   </span>
                   <h3 className="text-xl font-semibold text-white mt-2">
@@ -73,13 +73,13 @@ export function CaseStudies() {
                 </div>
 
                 <div className="pt-6 border-t border-[#27272a]">
-                  <div className="text-3xl font-bold text-[#10b981] mb-1">
+                  <div className="text-3xl font-bold text-[#3b82f6] mb-1">
                     {study.metric}
                   </div>
                   <div className="text-[#a1a1aa] text-sm mb-4">{study.metricLabel}</div>
                   <a
                     href="#case-studies"
-                    className="inline-flex items-center text-[#10b981] hover:text-[#34d399] text-sm font-medium transition-colors"
+                    className="inline-flex items-center text-[#3b82f6] hover:text-[#60a5fa] text-sm font-medium transition-colors"
                   >
                     Read Case Study
                     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

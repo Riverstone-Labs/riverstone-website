@@ -85,12 +85,12 @@ export function Pricing() {
               <motion.div
                 whileHover={{ y: -8 }}
                 className={`relative bg-[#1a1a1a] p-8 rounded-2xl border ${
-                  plan.popular ? "border-[#10b981]" : "border-[#27272a]"
+                  plan.popular ? "border-[#3b82f6]" : "border-[#27272a]"
                 } transition-all h-full flex flex-col`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="bg-[#10b981] text-[#0a0a0a] px-4 py-1 rounded-full text-sm font-semibold">
+                    <span className="bg-[#3b82f6] text-white px-4 py-1 rounded-full text-sm font-semibold">
                       Recommended
                     </span>
                   </div>
@@ -118,7 +118,7 @@ export function Pricing() {
                     >
                       <CheckCircle
                         size={18}
-                        className="text-[#10b981] mt-0.5 flex-shrink-0"
+                        className="text-[#3b82f6] mt-0.5 flex-shrink-0"
                       />
                       <span className="text-sm">{feature}</span>
                     </li>
@@ -129,8 +129,8 @@ export function Pricing() {
                   onClick={scrollToContact}
                   className={`w-full py-3 rounded-lg font-semibold transition-all ${
                     plan.popular
-                      ? "bg-[#10b981] hover:bg-[#059669] text-[#0a0a0a]"
-                      : "border border-[#27272a] hover:border-[#10b981] bg-transparent text-white hover:bg-transparent"
+                      ? "bg-[#3b82f6] hover:bg-[#2563eb] text-white"
+                      : "border border-[#27272a] hover:border-[#3b82f6] bg-transparent text-white hover:bg-transparent"
                   }`}
                 >
                   {plan.cta}
